@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="This is a mern web application" />
+    <link
+      rel="apple-touch-icon"
+      sizes="180x180"
+      href="/images/apple-touch-icon.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="/images/favicon-32x32.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="/images/favicon-16x16.png"
+    />
+    <link rel="manifest" href="/manifest.json" />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+    />
+    <title>SmartHome</title>
+
+    <!--     Fonts and icons     -->
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons"
+    />
+
+    <!-- CSS Files -->
+    <link href="/css/material-dashboard.css?v=2.1.1" rel="stylesheet" />
+    <link rel="stylesheet" href="/css/chartist.css" />
+    <link rel="stylesheet" href="/css/legend.css" />
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css"
+    />
+
+    <!-- Script Files -->
+    <script src="https://www.gstatic.com/firebasejs/7.5.2/firebase.js"></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.1.1/socket.io.js"
+      integrity="sha256-ji09tECORKvr8xB9iCl8DJ8iNMLriDchC1+p+yt1hSs="
+      crossorigin="anonymous"
+    ></script>
+
+    <style>
+      @media (max-width: 450px) {
+        .MuiBox-root {
+          padding-left: 0 !important;
+          padding-right: 0 !important;
+          margin-left: 0 !important;
+          margin-right: 0 !important;
+        }
+      }
+    </style>
+    <style>
+      html,
+      body {
+        height: 100% !important;
+      }
+      body {
+        display: flex !important;
+        flex-direction: column !important;
+        background-color: transparent;
+      }
+      .content {
+        flex: 1 0 auto !important;
+        background-color: lightblue;
+      }
+      .footer {
+        flex-shrink: 0 !important;
+        color: rgb(236, 222, 222);
+        text-align: right;
+      }
+      .footer p {
+        margin: 0 auto;
+      }
+      .top {
+        background: url("/images/bg.png") repeat-x top center;
+      }
+    </style>
+
+    <style>
+      table thead tr th {
+        text-align: center !important;
+        border: none !important;
+      }
+      table thead tr th label {
+        background-color: cadetblue;
+        padding: 0.5em;
+        display: block;
+        border-radius: 0 0 5px 5px;
+        font-weight: bold;
+        margin: -17px auto 0 auto;
+        color: white;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="content" id="root"></div>
+
+    <footer class="footer" style="background-color: transparent">
+      <p class="p-2">This website does not use cookies</p>
+    </footer>
+
+    <script src="/js/chartist.min.js"></script>
+    <script src="https://codeyellowbv.github.io/chartist-plugin-legend/chartist-plugin-legend.js"></script>
+  </body>
+</html>

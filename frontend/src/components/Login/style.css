@@ -1,0 +1,55 @@
+.content {
+  display: flex;
+  flex-direction: column;
+}
+
+.top {
+  flex: 1;
+  flex-grow: 2;
+  background-color : #c1dca9;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+}
+
+.top .login-container {
+  display: flex;
+  flex-direction: column;
+  width: 450px;
+  min-height: 650px;
+  position: absolute;
+  top: 15%;
+  background-color: transparent;
+}
+
+.top .login-container .login-header {
+  text-align: center;
+  background-color: transparent;
+}
+
+.bottom {
+  flex: 1;
+  flex-grow: 3;
+  background-color : #ebebeb;
+}
+
+.card-footer {
+  min-height: 7em;
+  background-color: #f6f6f6;
+  display: flex;
+  flex-direction: row;
+}
+
+.card-footer .section {
+  flex: 1;
+  text-align: center;
+  justify-content: center;
+  display: flex;
+  flex-direction: column;
+  color: orange;
+}
+
+.card-footer .section:first-child {
+  border-right: 1px solid #bdbdbd;
+  color: green;
+}

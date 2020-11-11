@@ -1,0 +1,73 @@
+
+### ----------------------------------
+### Controller API
+### ----------------------------------
+
+###
+// Get all users
+GET http://localhost:6600/api/v1/users
+Content-Type: application/json
+
+
+###
+// Get a user
+GET http://localhost:6600/api/v1/users/5f01b88b75bde83cc8e88cf3
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVmMDFiODhiNzViZGU4M2NjOGU4OGNmMyIsImVtYWlsIjoibmV3dXNlckB1c2VyLmNvbSIsImlhdCI6MTU5Mzk0ODM0M30.mlnn-Xa-eufKdEr7HPWZMgnUKhTnvYifxoMdni_GYNM
+Content-Type: application/json
+
+
+###
+// Create a user
+POST http://localhost:6600/api/v1/users
+Content-Type: application/json
+
+{
+  "user": {
+    "email": "newuser2@user.com",
+    "password": "newuser2-pass",
+    "quiz": []
+  }
+}
+
+
+###
+// Delete a user
+DELETE http://localhost:6600/api/v1/users/5f01adb31db0d633c0f8af62
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVlZmUyZWNkNjRmNWFiNTQzZGZmODM1MCIsImVtYWlsIjoibmV3dXNlckB1c2VyLmNvbSIsImlhdCI6MTU5MzcxNzE4MX0.vnUV3gKdJsj5B2xoxqPgHnzJHUBm-MGuX4yJbzDJQa8
+Content-Type: application/json
+
+
+###
+// Update a user
+PUT http://localhost:6600/api/v1/users/5f01ac97b4df2d32a355ea65
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVlZmUyZWNkNjRmNWFiNTQzZGZmODM1MCIsImVtYWlsIjoibmV3dXNlckB1c2VyLmNvbSIsImlhdCI6MTU5MzcxNzE4MX0.vnUV3gKdJsj5B2xoxqPgHnzJHUBm-MGuX4yJbzDJQa8
+Content-Type: application/json
+
+{
+  "user": {
+    "email": "login1@user.com",
+    "password": "login1-pass"
+  }
+}
+
+
+###
+// Login a user
+POST http://localhost:6600/api/v1/login
+Content-Type: application/json
+
+{
+  "user": {
+    "email": "newuser@user.com",
+    "password": "newuser-pass"
+  }
+}
+
+###
+// Get a user's latest quiz
+GET http://localhost:6600/api/v1/users/5f158bd86afc3f09504bc3f0/quiz
+
+###
+
+
+

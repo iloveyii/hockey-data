@@ -1,0 +1,1333 @@
+@charset "UTF-8";
+
+.invisible,
+.wf-loading .brwsrsup .brwsrsup__support--supported:after,
+.wf-loading .hint[class*="hint-"].hint-cross-browser:before,
+.wf-loading [data-icon]:before {
+  visibility: hidden;
+}
+#chartist-guy #chart-canvas .ct-chart-donut .ct-label,
+#chartist-guy #chart-canvas .ct-chart-pie .ct-label,
+#example-line-months-interpolation .ct-chart-donut .ct-label,
+#example-line-months-interpolation .ct-chart-pie .ct-label {
+  dominant-baseline: central;
+}
+[data-icon]:before {
+  content: attr(data-icon);
+  display: inline-block;
+  vertical-align: baseline;
+  font-family: FontAwesome;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 1em;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+.ct-double-octave:after,
+.ct-double-octave:before,
+.ct-golden-section:after,
+.ct-major-eleventh:after,
+.ct-major-eleventh:before,
+.ct-major-second:after,
+.ct-major-second:before,
+.ct-major-seventh:after,
+.ct-major-seventh:before,
+.ct-major-sixth:after,
+.ct-major-sixth:before,
+.ct-major-tenth:after,
+.ct-major-tenth:before,
+.ct-major-third:after,
+.ct-major-third:before,
+.ct-major-twelfth:after,
+.ct-major-twelfth:before,
+.ct-minor-second:after,
+.ct-minor-second:before,
+.ct-minor-seventh:after,
+.ct-minor-seventh:before,
+.ct-minor-sixth:after,
+.ct-minor-sixth:before,
+.ct-minor-third:after,
+.ct-minor-third:before,
+.ct-octave:after,
+.ct-octave:before,
+.ct-perfect-fifth:after,
+.ct-perfect-fifth:before,
+.ct-perfect-fourth:after,
+.ct-perfect-fourth:before,
+.ct-square:after,
+.ct-square:before {
+  content: "";
+}
+.ct-label {
+  fill: rgba(0, 0, 0, 0.4);
+  color: rgba(0, 0, 0, 0.4);
+  font-size: 0.75rem;
+  line-height: 1;
+}
+.ct-grid-background,
+.ct-line {
+  fill: none;
+}
+.ct-chart-bar .ct-label,
+.ct-chart-line .ct-label {
+  display: block;
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+}
+.ct-label.ct-horizontal.ct-start {
+  -webkit-box-align: flex-end;
+  -webkit-align-items: flex-end;
+  -ms-flex-align: flex-end;
+  align-items: flex-end;
+  -webkit-box-pack: flex-start;
+  -webkit-justify-content: flex-start;
+  -ms-flex-pack: flex-start;
+  justify-content: flex-start;
+  text-align: left;
+  text-anchor: start;
+}
+.ct-label.ct-horizontal.ct-end {
+  -webkit-box-align: flex-start;
+  -webkit-align-items: flex-start;
+  -ms-flex-align: flex-start;
+  align-items: flex-start;
+  -webkit-box-pack: flex-start;
+  -webkit-justify-content: flex-start;
+  -ms-flex-pack: flex-start;
+  justify-content: flex-start;
+  text-align: left;
+  text-anchor: start;
+}
+.ct-label.ct-vertical.ct-start {
+  -webkit-box-align: flex-end;
+  -webkit-align-items: flex-end;
+  -ms-flex-align: flex-end;
+  align-items: flex-end;
+  -webkit-box-pack: flex-end;
+  -webkit-justify-content: flex-end;
+  -ms-flex-pack: flex-end;
+  justify-content: flex-end;
+  text-align: right;
+  text-anchor: end;
+}
+.ct-label.ct-vertical.ct-end {
+  -webkit-box-align: flex-end;
+  -webkit-align-items: flex-end;
+  -ms-flex-align: flex-end;
+  align-items: flex-end;
+  -webkit-box-pack: flex-start;
+  -webkit-justify-content: flex-start;
+  -ms-flex-pack: flex-start;
+  justify-content: flex-start;
+  text-align: left;
+  text-anchor: start;
+}
+.ct-chart-bar .ct-label.ct-horizontal.ct-start {
+  -webkit-box-align: flex-end;
+  -webkit-align-items: flex-end;
+  -ms-flex-align: flex-end;
+  align-items: flex-end;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  text-align: center;
+  text-anchor: start;
+}
+.ct-chart-bar .ct-label.ct-horizontal.ct-end {
+  -webkit-box-align: flex-start;
+  -webkit-align-items: flex-start;
+  -ms-flex-align: flex-start;
+  align-items: flex-start;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  text-align: center;
+  text-anchor: start;
+}
+.ct-chart-bar.ct-horizontal-bars .ct-label.ct-horizontal.ct-start {
+  -webkit-box-align: flex-end;
+  -webkit-align-items: flex-end;
+  -ms-flex-align: flex-end;
+  align-items: flex-end;
+  -webkit-box-pack: flex-start;
+  -webkit-justify-content: flex-start;
+  -ms-flex-pack: flex-start;
+  justify-content: flex-start;
+  text-align: left;
+  text-anchor: start;
+}
+.ct-chart-bar.ct-horizontal-bars .ct-label.ct-horizontal.ct-end {
+  -webkit-box-align: flex-start;
+  -webkit-align-items: flex-start;
+  -ms-flex-align: flex-start;
+  align-items: flex-start;
+  -webkit-box-pack: flex-start;
+  -webkit-justify-content: flex-start;
+  -ms-flex-pack: flex-start;
+  justify-content: flex-start;
+  text-align: left;
+  text-anchor: start;
+}
+.ct-chart-bar.ct-horizontal-bars .ct-label.ct-vertical.ct-start {
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: flex-end;
+  -webkit-justify-content: flex-end;
+  -ms-flex-pack: flex-end;
+  justify-content: flex-end;
+  text-align: right;
+  text-anchor: end;
+}
+.ct-chart-bar.ct-horizontal-bars .ct-label.ct-vertical.ct-end {
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: flex-start;
+  -webkit-justify-content: flex-start;
+  -ms-flex-pack: flex-start;
+  justify-content: flex-start;
+  text-align: left;
+  text-anchor: end;
+}
+.ct-grid {
+  stroke: rgba(0, 0, 0, 0.2);
+  stroke-width: 1px;
+  stroke-dasharray: 2px;
+}
+.ct-point {
+  stroke-width: 10px;
+  stroke-linecap: round;
+}
+.ct-line {
+  stroke-width: 4px;
+}
+.ct-area {
+  stroke: none;
+  fill-opacity: 0.1;
+}
+.ct-bar {
+  fill: none;
+  stroke-width: 10px;
+}
+.ct-slice-donut {
+  fill: none;
+  stroke-width: 60px;
+}
+.ct-series-a .ct-bar,
+.ct-series-a .ct-line,
+.ct-series-a .ct-point,
+.ct-series-a .ct-slice-donut {
+  stroke: #d70206;
+}
+.ct-series-a .ct-area,
+.ct-series-a .ct-slice-donut-solid,
+.ct-series-a .ct-slice-pie {
+  fill: #d70206;
+}
+.ct-series-b .ct-bar,
+.ct-series-b .ct-line,
+.ct-series-b .ct-point,
+.ct-series-b .ct-slice-donut {
+  stroke: #f05b4f;
+}
+.ct-series-b .ct-area,
+.ct-series-b .ct-slice-donut-solid,
+.ct-series-b .ct-slice-pie {
+  fill: #f05b4f;
+}
+.ct-series-c .ct-bar,
+.ct-series-c .ct-line,
+.ct-series-c .ct-point,
+.ct-series-c .ct-slice-donut {
+  stroke: #f4c63d;
+}
+.ct-series-c .ct-area,
+.ct-series-c .ct-slice-donut-solid,
+.ct-series-c .ct-slice-pie {
+  fill: #f4c63d;
+}
+.ct-series-d .ct-bar,
+.ct-series-d .ct-line,
+.ct-series-d .ct-point,
+.ct-series-d .ct-slice-donut {
+  stroke: #d17905;
+}
+.ct-series-d .ct-area,
+.ct-series-d .ct-slice-donut-solid,
+.ct-series-d .ct-slice-pie {
+  fill: #d17905;
+}
+.ct-series-e .ct-bar,
+.ct-series-e .ct-line,
+.ct-series-e .ct-point,
+.ct-series-e .ct-slice-donut {
+  stroke: #453d3f;
+}
+.ct-series-e .ct-area,
+.ct-series-e .ct-slice-donut-solid,
+.ct-series-e .ct-slice-pie {
+  fill: #453d3f;
+}
+.ct-series-f .ct-bar,
+.ct-series-f .ct-line,
+.ct-series-f .ct-point,
+.ct-series-f .ct-slice-donut {
+  stroke: #59922b;
+}
+.ct-series-f .ct-area,
+.ct-series-f .ct-slice-donut-solid,
+.ct-series-f .ct-slice-pie {
+  fill: #59922b;
+}
+.ct-series-g .ct-bar,
+.ct-series-g .ct-line,
+.ct-series-g .ct-point,
+.ct-series-g .ct-slice-donut {
+  stroke: #0544d3;
+}
+.ct-series-g .ct-area,
+.ct-series-g .ct-slice-donut-solid,
+.ct-series-g .ct-slice-pie {
+  fill: #0544d3;
+}
+.ct-series-h .ct-bar,
+.ct-series-h .ct-line,
+.ct-series-h .ct-point,
+.ct-series-h .ct-slice-donut {
+  stroke: #6b0392;
+}
+.ct-series-h .ct-area,
+.ct-series-h .ct-slice-donut-solid,
+.ct-series-h .ct-slice-pie {
+  fill: #6b0392;
+}
+.ct-series-i .ct-bar,
+.ct-series-i .ct-line,
+.ct-series-i .ct-point,
+.ct-series-i .ct-slice-donut {
+  stroke: #f05b4f;
+}
+.ct-series-i .ct-area,
+.ct-series-i .ct-slice-donut-solid,
+.ct-series-i .ct-slice-pie {
+  fill: #f05b4f;
+}
+.ct-series-j .ct-bar,
+.ct-series-j .ct-line,
+.ct-series-j .ct-point,
+.ct-series-j .ct-slice-donut {
+  stroke: #dda458;
+}
+.ct-series-j .ct-area,
+.ct-series-j .ct-slice-donut-solid,
+.ct-series-j .ct-slice-pie {
+  fill: #dda458;
+}
+.ct-series-k .ct-bar,
+.ct-series-k .ct-line,
+.ct-series-k .ct-point,
+.ct-series-k .ct-slice-donut {
+  stroke: #eacf7d;
+}
+.ct-series-k .ct-area,
+.ct-series-k .ct-slice-donut-solid,
+.ct-series-k .ct-slice-pie {
+  fill: #eacf7d;
+}
+.ct-series-l .ct-bar,
+.ct-series-l .ct-line,
+.ct-series-l .ct-point,
+.ct-series-l .ct-slice-donut {
+  stroke: #86797d;
+}
+.ct-series-l .ct-area,
+.ct-series-l .ct-slice-donut-solid,
+.ct-series-l .ct-slice-pie {
+  fill: #86797d;
+}
+.ct-series-m .ct-bar,
+.ct-series-m .ct-line,
+.ct-series-m .ct-point,
+.ct-series-m .ct-slice-donut {
+  stroke: #b2c326;
+}
+.ct-series-m .ct-area,
+.ct-series-m .ct-slice-donut-solid,
+.ct-series-m .ct-slice-pie {
+  fill: #b2c326;
+}
+.ct-series-n .ct-bar,
+.ct-series-n .ct-line,
+.ct-series-n .ct-point,
+.ct-series-n .ct-slice-donut {
+  stroke: #6188e2;
+}
+.ct-series-n .ct-area,
+.ct-series-n .ct-slice-donut-solid,
+.ct-series-n .ct-slice-pie {
+  fill: #6188e2;
+}
+.ct-series-o .ct-bar,
+.ct-series-o .ct-line,
+.ct-series-o .ct-point,
+.ct-series-o .ct-slice-donut {
+  stroke: #a748ca;
+}
+.ct-series-o .ct-area,
+.ct-series-o .ct-slice-donut-solid,
+.ct-series-o .ct-slice-pie {
+  fill: #a748ca;
+}
+.ct-square {
+  display: block;
+  position: relative;
+  width: 100%;
+}
+.ct-square:before {
+  display: block;
+  float: left;
+  width: 0;
+  height: 0;
+  padding-bottom: 100%;
+}
+.ct-square:after {
+  display: table;
+  clear: both;
+}
+.ct-square > svg {
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+.ct-minor-second {
+  display: block;
+  position: relative;
+  width: 100%;
+}
+.ct-minor-second:before {
+  display: block;
+  float: left;
+  width: 0;
+  height: 0;
+  padding-bottom: 93.75%;
+}
+.ct-minor-second:after {
+  display: table;
+  clear: both;
+}
+.ct-minor-second > svg {
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+.ct-major-second {
+  display: block;
+  position: relative;
+  width: 100%;
+}
+.ct-major-second:before {
+  display: block;
+  float: left;
+  width: 0;
+  height: 0;
+  padding-bottom: 88.8888888889%;
+}
+.ct-major-second:after {
+  display: table;
+  clear: both;
+}
+.ct-major-second > svg {
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+.ct-minor-third {
+  display: block;
+  position: relative;
+  width: 100%;
+}
+.ct-minor-third:before {
+  display: block;
+  float: left;
+  width: 0;
+  height: 0;
+  padding-bottom: 83.3333333333%;
+}
+.ct-minor-third:after {
+  display: table;
+  clear: both;
+}
+.ct-minor-third > svg {
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+.ct-major-third {
+  display: block;
+  position: relative;
+  width: 100%;
+}
+.ct-major-third:before {
+  display: block;
+  float: left;
+  width: 0;
+  height: 0;
+  padding-bottom: 80%;
+}
+.ct-major-third:after {
+  display: table;
+  clear: both;
+}
+.ct-major-third > svg {
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+.ct-perfect-fourth {
+  display: block;
+  position: relative;
+  width: 100%;
+}
+.ct-perfect-fourth:before {
+  display: block;
+  float: left;
+  width: 0;
+  height: 0;
+  padding-bottom: 75%;
+}
+.ct-perfect-fourth:after {
+  display: table;
+  clear: both;
+}
+.ct-perfect-fourth > svg {
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+.ct-perfect-fifth {
+  display: block;
+  position: relative;
+  width: 100%;
+}
+.ct-perfect-fifth:before {
+  display: block;
+  float: left;
+  width: 0;
+  height: 0;
+  padding-bottom: 66.6666666667%;
+}
+.ct-perfect-fifth:after {
+  display: table;
+  clear: both;
+}
+.ct-perfect-fifth > svg {
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+.ct-minor-sixth {
+  display: block;
+  position: relative;
+  width: 100%;
+}
+.ct-minor-sixth:before {
+  display: block;
+  float: left;
+  width: 0;
+  height: 0;
+  padding-bottom: 62.5%;
+}
+.ct-minor-sixth:after {
+  display: table;
+  clear: both;
+}
+.ct-minor-sixth > svg {
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+.ct-golden-section {
+  display: block;
+  position: relative;
+  width: 100%;
+}
+.ct-golden-section:before {
+  display: block;
+  float: left;
+  content: "";
+  width: 0;
+  height: 0;
+  padding-bottom: 61.804697157%;
+}
+.ct-golden-section:after {
+  display: table;
+  clear: both;
+}
+.ct-golden-section > svg {
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+.ct-major-sixth {
+  display: block;
+  position: relative;
+  width: 100%;
+}
+.ct-major-sixth:before {
+  display: block;
+  float: left;
+  width: 0;
+  height: 0;
+  padding-bottom: 60%;
+}
+.ct-major-sixth:after {
+  display: table;
+  clear: both;
+}
+.ct-major-sixth > svg {
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+.ct-minor-seventh {
+  display: block;
+  position: relative;
+  width: 100%;
+}
+.ct-minor-seventh:before {
+  display: block;
+  float: left;
+  width: 0;
+  height: 0;
+  padding-bottom: 56.25%;
+}
+.ct-minor-seventh:after {
+  display: table;
+  clear: both;
+}
+.ct-minor-seventh > svg {
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+.ct-major-seventh {
+  display: block;
+  position: relative;
+  width: 100%;
+}
+.ct-major-seventh:before {
+  display: block;
+  float: left;
+  width: 0;
+  height: 0;
+  padding-bottom: 53.3333333333%;
+}
+.ct-major-seventh:after {
+  display: table;
+  clear: both;
+}
+.ct-major-seventh > svg {
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+.ct-octave {
+  display: block;
+  position: relative;
+  width: 100%;
+}
+.ct-octave:before {
+  display: block;
+  float: left;
+  width: 0;
+  height: 0;
+  padding-bottom: 50%;
+}
+.ct-octave:after {
+  display: table;
+  clear: both;
+}
+.ct-octave > svg {
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+.ct-major-tenth {
+  display: block;
+  position: relative;
+  width: 100%;
+}
+.ct-major-tenth:before {
+  display: block;
+  float: left;
+  width: 0;
+  height: 0;
+  padding-bottom: 40%;
+}
+.ct-major-tenth:after {
+  display: table;
+  clear: both;
+}
+.ct-major-tenth > svg {
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+.ct-major-eleventh {
+  display: block;
+  position: relative;
+  width: 100%;
+}
+.ct-major-eleventh:before {
+  display: block;
+  float: left;
+  width: 0;
+  height: 0;
+  padding-bottom: 37.5%;
+}
+.ct-major-eleventh:after {
+  display: table;
+  clear: both;
+}
+.ct-major-eleventh > svg {
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+.ct-major-twelfth {
+  display: block;
+  position: relative;
+  width: 100%;
+}
+.ct-major-twelfth:before {
+  display: block;
+  float: left;
+  width: 0;
+  height: 0;
+  padding-bottom: 33.3333333333%;
+}
+.ct-major-twelfth:after {
+  display: table;
+  clear: both;
+}
+.ct-major-twelfth > svg {
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+.ct-double-octave {
+  display: block;
+  position: relative;
+  width: 100%;
+}
+.ct-double-octave:before {
+  display: block;
+  float: left;
+  width: 0;
+  height: 0;
+  padding-bottom: 25%;
+}
+body,
+legend,
+td,
+th {
+  padding: 0;
+}
+.ct-double-octave:after {
+  display: table;
+  clear: both;
+}
+.ct-double-octave > svg {
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+#map_canvas embed,
+#map_canvas img,
+#map_canvas object,
+.map_canvas embed,
+.map_canvas img,
+.map_canvas object,
+.mqa-display embed,
+.mqa-display img,
+.mqa-display object {
+  max-width: none !important;
+}
+.live-example,
+.top-bar .row {
+  max-width: none;
+}
+.left {
+  float: left !important;
+}
+.right {
+  float: right !important;
+}
+.clearfix:after,
+.clearfix:before {
+  content: " ";
+  display: table;
+}
+.clearfix:after {
+  clear: both;
+}
+.hide {
+  display: none;
+}
+img {
+  display: inline-block;
+  vertical-align: middle;
+}
+
+@media only screen and (min-width: 64.063em) {
+  .live-example.edit-mode .chart,
+  .live-example.edit-mode .live-code {
+    padding-left: 1.5625rem;
+    padding-right: 1.5625rem;
+    width: 100%;
+    float: left;
+  }
+  .live-example .chart {
+    padding-left: 1.5625rem;
+    padding-right: 1.5625rem;
+    width: 66.6666666667%;
+    float: left;
+  }
+}
+.live-example .live-code {
+  padding-left: 1.5625rem;
+  padding-right: 1.5625rem;
+  width: 100%;
+  float: left;
+}
+.live-example .live-code .editor-area {
+  display: none;
+}
+@media only screen and (min-width: 64.063em) {
+  .live-example .live-code {
+    padding-left: 1.5625rem;
+    padding-right: 1.5625rem;
+    width: 33.3333333333%;
+    float: left;
+  }
+}
+.live-example .ct-negative-labels .ct-label {
+  fill: rgba(255, 255, 255, 0.8);
+}
+#chartist-guy #chart-canvas .ct-label {
+  fill: #81602e;
+  color: #81602e;
+  font-size: 0.75rem;
+  line-height: 1;
+}
+#chartist-guy #chart-canvas .ct-chart-bar .ct-label,
+#chartist-guy #chart-canvas .ct-chart-line .ct-label {
+  display: block;
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+}
+#chartist-guy #chart-canvas .ct-label.ct-horizontal.ct-start {
+  -webkit-box-align: flex-end;
+  -webkit-align-items: flex-end;
+  -ms-flex-align: flex-end;
+  align-items: flex-end;
+  -webkit-box-pack: flex-start;
+  -webkit-justify-content: flex-start;
+  -ms-flex-pack: flex-start;
+  justify-content: flex-start;
+  text-align: left;
+  text-anchor: start;
+}
+#chartist-guy #chart-canvas .ct-label.ct-horizontal.ct-end {
+  -webkit-box-align: flex-start;
+  -webkit-align-items: flex-start;
+  -ms-flex-align: flex-start;
+  align-items: flex-start;
+  -webkit-box-pack: flex-start;
+  -webkit-justify-content: flex-start;
+  -ms-flex-pack: flex-start;
+  justify-content: flex-start;
+  text-align: left;
+  text-anchor: start;
+}
+#chartist-guy #chart-canvas .ct-label.ct-vertical.ct-start {
+  -webkit-box-align: flex-end;
+  -webkit-align-items: flex-end;
+  -ms-flex-align: flex-end;
+  align-items: flex-end;
+  -webkit-box-pack: flex-end;
+  -webkit-justify-content: flex-end;
+  -ms-flex-pack: flex-end;
+  justify-content: flex-end;
+  text-align: right;
+  text-anchor: end;
+}
+#chartist-guy #chart-canvas .ct-label.ct-vertical.ct-end {
+  -webkit-box-align: flex-end;
+  -webkit-align-items: flex-end;
+  -ms-flex-align: flex-end;
+  align-items: flex-end;
+  -webkit-box-pack: flex-start;
+  -webkit-justify-content: flex-start;
+  -ms-flex-pack: flex-start;
+  justify-content: flex-start;
+  text-align: left;
+  text-anchor: start;
+}
+#chartist-guy #chart-canvas .ct-chart-bar .ct-label.ct-horizontal.ct-start {
+  -webkit-box-align: flex-end;
+  -webkit-align-items: flex-end;
+  -ms-flex-align: flex-end;
+  align-items: flex-end;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  text-align: center;
+  text-anchor: start;
+}
+#chartist-guy #chart-canvas .ct-chart-bar .ct-label.ct-horizontal.ct-end {
+  -webkit-box-align: flex-start;
+  -webkit-align-items: flex-start;
+  -ms-flex-align: flex-start;
+  align-items: flex-start;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  text-align: center;
+  text-anchor: start;
+}
+#chartist-guy
+  #chart-canvas
+  .ct-chart-bar.ct-horizontal-bars
+  .ct-label.ct-horizontal.ct-start {
+  -webkit-box-align: flex-end;
+  -webkit-align-items: flex-end;
+  -ms-flex-align: flex-end;
+  align-items: flex-end;
+  -webkit-box-pack: flex-start;
+  -webkit-justify-content: flex-start;
+  -ms-flex-pack: flex-start;
+  justify-content: flex-start;
+  text-align: left;
+  text-anchor: start;
+}
+#chartist-guy
+  #chart-canvas
+  .ct-chart-bar.ct-horizontal-bars
+  .ct-label.ct-horizontal.ct-end {
+  -webkit-box-align: flex-start;
+  -webkit-align-items: flex-start;
+  -ms-flex-align: flex-start;
+  align-items: flex-start;
+  -webkit-box-pack: flex-start;
+  -webkit-justify-content: flex-start;
+  -ms-flex-pack: flex-start;
+  justify-content: flex-start;
+  text-align: left;
+  text-anchor: start;
+}
+#chartist-guy
+  #chart-canvas
+  .ct-chart-bar.ct-horizontal-bars
+  .ct-label.ct-vertical.ct-start {
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: flex-end;
+  -webkit-justify-content: flex-end;
+  -ms-flex-pack: flex-end;
+  justify-content: flex-end;
+  text-align: right;
+  text-anchor: end;
+}
+#chartist-guy
+  #chart-canvas
+  .ct-chart-bar.ct-horizontal-bars
+  .ct-label.ct-vertical.ct-end {
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: flex-start;
+  -webkit-justify-content: flex-start;
+  -ms-flex-pack: flex-start;
+  justify-content: flex-start;
+  text-align: left;
+  text-anchor: end;
+}
+#chartist-guy #chart-canvas .ct-grid {
+  stroke: #cfad79;
+  stroke-width: 1px;
+  stroke-dasharray: 2px;
+}
+#chartist-guy #chart-canvas .ct-grid-background {
+  fill: none;
+}
+#chartist-guy #chart-canvas .ct-point {
+  stroke-width: 10px;
+  stroke-linecap: round;
+}
+#chartist-guy #chart-canvas .ct-line {
+  fill: none;
+  stroke-width: 4px;
+}
+#chartist-guy #chart-canvas .ct-area {
+  stroke: none;
+  fill-opacity: 0.1;
+}
+#chartist-guy #chart-canvas .ct-bar {
+  fill: none;
+  stroke-width: 10px;
+}
+#chartist-guy #chart-canvas .ct-slice-donut {
+  fill: none;
+  stroke-width: 60px;
+}
+#chartist-guy #chart-canvas .ct-series-a .ct-bar,
+#chartist-guy #chart-canvas .ct-series-a .ct-line,
+#chartist-guy #chart-canvas .ct-series-a .ct-point,
+#chartist-guy #chart-canvas .ct-series-a .ct-slice-donut {
+  stroke: #d70206;
+}
+#chartist-guy #chart-canvas .ct-series-a .ct-area,
+#chartist-guy #chart-canvas .ct-series-a .ct-slice-donut-solid,
+#chartist-guy #chart-canvas .ct-series-a .ct-slice-pie {
+  fill: #d70206;
+}
+#chartist-guy #chart-canvas .ct-series-b .ct-bar,
+#chartist-guy #chart-canvas .ct-series-b .ct-line,
+#chartist-guy #chart-canvas .ct-series-b .ct-point,
+#chartist-guy #chart-canvas .ct-series-b .ct-slice-donut {
+  stroke: #f05b4f;
+}
+#chartist-guy #chart-canvas .ct-series-b .ct-area,
+#chartist-guy #chart-canvas .ct-series-b .ct-slice-donut-solid,
+#chartist-guy #chart-canvas .ct-series-b .ct-slice-pie {
+  fill: #f05b4f;
+}
+#chartist-guy #chart-canvas .ct-series-c .ct-bar,
+#chartist-guy #chart-canvas .ct-series-c .ct-line,
+#chartist-guy #chart-canvas .ct-series-c .ct-point,
+#chartist-guy #chart-canvas .ct-series-c .ct-slice-donut {
+  stroke: #f4c63d;
+}
+#chartist-guy #chart-canvas .ct-series-c .ct-area,
+#chartist-guy #chart-canvas .ct-series-c .ct-slice-donut-solid,
+#chartist-guy #chart-canvas .ct-series-c .ct-slice-pie {
+  fill: #f4c63d;
+}
+#chartist-guy #chart-canvas .ct-series-d .ct-bar,
+#chartist-guy #chart-canvas .ct-series-d .ct-line,
+#chartist-guy #chart-canvas .ct-series-d .ct-point,
+#chartist-guy #chart-canvas .ct-series-d .ct-slice-donut {
+  stroke: #d17905;
+}
+#chartist-guy #chart-canvas .ct-series-d .ct-area,
+#chartist-guy #chart-canvas .ct-series-d .ct-slice-donut-solid,
+#chartist-guy #chart-canvas .ct-series-d .ct-slice-pie {
+  fill: #d17905;
+}
+#chartist-guy #chart-canvas .ct-series-e .ct-bar,
+#chartist-guy #chart-canvas .ct-series-e .ct-line,
+#chartist-guy #chart-canvas .ct-series-e .ct-point,
+#chartist-guy #chart-canvas .ct-series-e .ct-slice-donut {
+  stroke: #453d3f;
+}
+#chartist-guy #chart-canvas .ct-series-e .ct-area,
+#chartist-guy #chart-canvas .ct-series-e .ct-slice-donut-solid,
+#chartist-guy #chart-canvas .ct-series-e .ct-slice-pie {
+  fill: #453d3f;
+}
+#chartist-guy #chart-canvas .ct-series-f .ct-bar,
+#chartist-guy #chart-canvas .ct-series-f .ct-line,
+#chartist-guy #chart-canvas .ct-series-f .ct-point,
+#chartist-guy #chart-canvas .ct-series-f .ct-slice-donut {
+  stroke: #59922b;
+}
+#chartist-guy #chart-canvas .ct-series-f .ct-area,
+#chartist-guy #chart-canvas .ct-series-f .ct-slice-donut-solid,
+#chartist-guy #chart-canvas .ct-series-f .ct-slice-pie {
+  fill: #59922b;
+}
+#chartist-guy #chart-canvas .ct-series-g .ct-bar,
+#chartist-guy #chart-canvas .ct-series-g .ct-line,
+#chartist-guy #chart-canvas .ct-series-g .ct-point,
+#chartist-guy #chart-canvas .ct-series-g .ct-slice-donut {
+  stroke: #0544d3;
+}
+#chartist-guy #chart-canvas .ct-series-g .ct-area,
+#chartist-guy #chart-canvas .ct-series-g .ct-slice-donut-solid,
+#chartist-guy #chart-canvas .ct-series-g .ct-slice-pie {
+  fill: #0544d3;
+}
+#chartist-guy #chart-canvas .ct-series-h .ct-bar,
+#chartist-guy #chart-canvas .ct-series-h .ct-line,
+#chartist-guy #chart-canvas .ct-series-h .ct-point,
+#chartist-guy #chart-canvas .ct-series-h .ct-slice-donut {
+  stroke: #6b0392;
+}
+#chartist-guy #chart-canvas .ct-series-h .ct-area,
+#chartist-guy #chart-canvas .ct-series-h .ct-slice-donut-solid,
+#chartist-guy #chart-canvas .ct-series-h .ct-slice-pie {
+  fill: #6b0392;
+}
+#chartist-guy #chart-canvas .ct-series-i .ct-bar,
+#chartist-guy #chart-canvas .ct-series-i .ct-line,
+#chartist-guy #chart-canvas .ct-series-i .ct-point,
+#chartist-guy #chart-canvas .ct-series-i .ct-slice-donut {
+  stroke: #f05b4f;
+}
+#chartist-guy #chart-canvas .ct-series-i .ct-area,
+#chartist-guy #chart-canvas .ct-series-i .ct-slice-donut-solid,
+#chartist-guy #chart-canvas .ct-series-i .ct-slice-pie {
+  fill: #f05b4f;
+}
+#chartist-guy #chart-canvas .ct-series-j .ct-bar,
+#chartist-guy #chart-canvas .ct-series-j .ct-line,
+#chartist-guy #chart-canvas .ct-series-j .ct-point,
+#chartist-guy #chart-canvas .ct-series-j .ct-slice-donut {
+  stroke: #dda458;
+}
+#chartist-guy #chart-canvas .ct-series-j .ct-area,
+#chartist-guy #chart-canvas .ct-series-j .ct-slice-donut-solid,
+#chartist-guy #chart-canvas .ct-series-j .ct-slice-pie {
+  fill: #dda458;
+}
+#chartist-guy #chart-canvas .ct-series-k .ct-bar,
+#chartist-guy #chart-canvas .ct-series-k .ct-line,
+#chartist-guy #chart-canvas .ct-series-k .ct-point,
+#chartist-guy #chart-canvas .ct-series-k .ct-slice-donut {
+  stroke: #eacf7d;
+}
+#chartist-guy #chart-canvas .ct-series-k .ct-area,
+#chartist-guy #chart-canvas .ct-series-k .ct-slice-donut-solid,
+#chartist-guy #chart-canvas .ct-series-k .ct-slice-pie {
+  fill: #eacf7d;
+}
+#chartist-guy #chart-canvas .ct-series-l .ct-bar,
+#chartist-guy #chart-canvas .ct-series-l .ct-line,
+#chartist-guy #chart-canvas .ct-series-l .ct-point,
+#chartist-guy #chart-canvas .ct-series-l .ct-slice-donut {
+  stroke: #86797d;
+}
+#chartist-guy #chart-canvas .ct-series-l .ct-area,
+#chartist-guy #chart-canvas .ct-series-l .ct-slice-donut-solid,
+#chartist-guy #chart-canvas .ct-series-l .ct-slice-pie {
+  fill: #86797d;
+}
+#chartist-guy #chart-canvas .ct-series-m .ct-bar,
+#chartist-guy #chart-canvas .ct-series-m .ct-line,
+#chartist-guy #chart-canvas .ct-series-m .ct-point,
+#chartist-guy #chart-canvas .ct-series-m .ct-slice-donut {
+  stroke: #b2c326;
+}
+#chartist-guy #chart-canvas .ct-series-m .ct-area,
+#chartist-guy #chart-canvas .ct-series-m .ct-slice-donut-solid,
+#chartist-guy #chart-canvas .ct-series-m .ct-slice-pie {
+  fill: #b2c326;
+}
+#chartist-guy #chart-canvas .ct-series-n .ct-bar,
+#chartist-guy #chart-canvas .ct-series-n .ct-line,
+#chartist-guy #chart-canvas .ct-series-n .ct-point,
+#chartist-guy #chart-canvas .ct-series-n .ct-slice-donut {
+  stroke: #6188e2;
+}
+#chartist-guy #chart-canvas .ct-series-n .ct-area,
+#chartist-guy #chart-canvas .ct-series-n .ct-slice-donut-solid,
+#chartist-guy #chart-canvas .ct-series-n .ct-slice-pie {
+  fill: #6188e2;
+}
+#chartist-guy #chart-canvas .ct-series-o .ct-bar,
+#chartist-guy #chart-canvas .ct-series-o .ct-line,
+#chartist-guy #chart-canvas .ct-series-o .ct-point,
+#chartist-guy #chart-canvas .ct-series-o .ct-slice-donut {
+  stroke: #a748ca;
+}
+#chartist-guy #chart-canvas .ct-series-o .ct-area,
+#chartist-guy #chart-canvas .ct-series-o .ct-slice-donut-solid,
+#chartist-guy #chart-canvas .ct-series-o .ct-slice-pie {
+  fill: #a748ca;
+}
+#chartist-guy #chart-canvas .ct-series-a .ct-point {
+  stroke-width: 8px;
+  stroke-linecap: square;
+}
+#chartist-guy #chart-canvas .ct-series-a .ct-line {
+  fill: none;
+  stroke-width: 4px;
+  stroke-dasharray: 5px;
+  -webkit-animation: dashoffset 1s linear infinite;
+  -moz-animation: dashoffset 1s linear infinite;
+  -o-animation: dashoffset 1s linear infinite;
+  animation: dashoffset 1s linear infinite;
+}
+
+.page-content .sticky.contain-to-grid .top-bar .name h1 a:before,
+.sticky.contain-to-grid.fixed .top-bar .name h1 a:before {
+  content: "";
+  display: inline-block;
+  width: 34px;
+  height: 34px;
+  margin-top: -4px;
+  margin-right: 10px;
+  vertical-align: middle;
+  border-radius: 50%;
+  border: 2px solid #f4c63d;
+  background: url(data:image/svg+xml;base64,PHN2ZyB2ZXJzaW9uPSIxLjEiIGlkPSJMYXllcl8xIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHg9IjAiIHk9IjAiIHZpZXdCb3g9IjAgMCAzMiAzMiIgZW5hYmxlLWJhY2tncm91bmQ9Im5ldyAwIDAgMzIgMzIiIHhtbDpzcGFjZT0icHJlc2VydmUiPjxnIGlkPSJoZWFkIj48cGF0aCBmaWxsPSIjNzU1NDNCIiBkPSJNMTMuOCAyMC42czEuNiA1LTMuOSA1bDQuOSAxLjUgNC00LjItNS0yLjN6Ii8+PHBhdGggZmlsbD0iI0IyNDk0OSIgZD0iTTE3LjEgMjVzLTQuMS0xLjUtNS45IDEuMWwzLjcuOSAyLjItMnoiLz48cGF0aCBmaWxsPSIjRDM5Qzc2IiBkPSJNOS45IDI1LjRjMi4xIDEuMSA1IC42IDYgMCAxLjUtLjggMS41LTMgMS4xLTMuMi0uMi0uMS0yLjIgMS4zLTUuOS4xbC40LTMuMy01LjktLjJMOS43IDguNHM3LTIuOSAxNCAwVjE5Yy40LS4xLjgtLjIgMS4xIDAgLjkuMyAxLjEgMS40LjYgMi41LS40LjctMSAxLjMtMS43IDEuNHY2LjJzLTcuMiA0LjgtMTUuMSAyLjFjMCAwLTIuNS0uOC0yLjMtMy40IDAtLjItLjItMS45IDMuNi0yLjR6Ii8+PGcgZmlsbD0iIzYzNDEyOCI+PHBhdGggZD0iTTE1LjEgMTQuNGMwIC41LjkgMSAxLjkgMSAxLjEgMCAxLjktLjQgMS45LTEgMC0uNS0uOS0xLTEuOS0xLTEgMC0xLjkuNS0xLjkgMXpNOS43IDE0LjRjMCAuNS44IDEgMS45IDEgMSAwIDEuOS0uNCAxLjktMXMtLjgtMS0xLjktMWMtMS4xLjEtMS45LjUtMS45IDF6Ii8+PC9nPjxwYXRoIGZpbGw9IiMyMzFGMjAiIGQ9Ik0yMy44IDEwLjVWNmMuMS0zLjYgMS40LTUuMS40LTUuMy0xLS4yLTMuMi0uNi03LjgtLjYtNC4xIDAtNy4yLjUtOC4yLjZDNy4zIDEgOSAzLjkgOS4zIDZjLjEgMSAuMSAyLjUuMSAzLjgtMy4zLjUtNS4zIDEuNy01LjcgMi44aDI2LjZzLS4zLTEuMS02LjUtMi4xeiIvPjxwYXRoIGZpbGw9IiMzNTM0MzMiIGQ9Ik0xMi44IDIyLjRjMy4xIDIuOCAxMC40IDIuMyAxMC45LTIuMS4xLTEuMy0uNS0uMy0xLjEuMS0uOS42LTIuNS42LTMuNCAwLTEuNS0xLTQuMS00LjEtNi40LTEuOC0yLjQtMi4zLTUgLjgtNi41IDEuOC0uOS42LTIuNi42LTMuNSAwLS42LS40LTEuMi0xLjMtMS4xLS4xLjUgNC40IDcuOSA0LjkgMTEuMSAyLjF6Ii8+PC9nPjwvc3ZnPg==)
+    center no-repeat #f4c63d;
+}
+.ct-chart {
+  margin-bottom: 1rem;
+}
+.ct-chart-donut .ct-label,
+.ct-chart-pie .ct-label {
+  dominant-baseline: central;
+  font-size: 1em;
+}
+@media only screen and (max-width: 40em) {
+  .ct-chart-donut .ct-label,
+  .ct-chart-pie .ct-label {
+    fill: rgba(255, 255, 255, 0.8);
+  }
+}
+@-webkit-keyframes dashoffset {
+  0% {
+    stroke-dashoffset: 0;
+  }
+  100% {
+    stroke-dashoffset: -20px;
+  }
+}
+@-moz-keyframes dashoffset {
+  0% {
+    stroke-dashoffset: 0;
+  }
+  100% {
+    stroke-dashoffset: -20px;
+  }
+}
+@-ms-keyframes dashoffset {
+  0% {
+    stroke-dashoffset: 0;
+  }
+  100% {
+    stroke-dashoffset: -20px;
+  }
+}
+@keyframes dashoffset {
+  0% {
+    stroke-dashoffset: 0;
+  }
+  100% {
+    stroke-dashoffset: -20px;
+  }
+}
+@-webkit-keyframes bouncing-stroke {
+  0%,
+  100% {
+    stroke-width: 5px;
+  }
+  50% {
+    stroke-width: 10px;
+  }
+}
+@-moz-keyframes bouncing-stroke {
+  0%,
+  100% {
+    stroke-width: 5px;
+  }
+  50% {
+    stroke-width: 10px;
+  }
+}
+@-ms-keyframes bouncing-stroke {
+  0%,
+  100% {
+    stroke-width: 5px;
+  }
+  50% {
+    stroke-width: 10px;
+  }
+}
+@keyframes bouncing-stroke {
+  0%,
+  100% {
+    stroke-width: 5px;
+  }
+  50% {
+    stroke-width: 10px;
+  }
+}
+@-webkit-keyframes exploding-stroke {
+  0% {
+    stroke-width: 2px;
+    opacity: 1;
+  }
+  100% {
+    stroke-width: 20px;
+    opacity: 0;
+  }
+}
+@-moz-keyframes exploding-stroke {
+  0% {
+    stroke-width: 2px;
+    opacity: 1;
+  }
+  100% {
+    stroke-width: 20px;
+    opacity: 0;
+  }
+}
+@-ms-keyframes exploding-stroke {
+  0% {
+    stroke-width: 2px;
+    opacity: 1;
+  }
+  100% {
+    stroke-width: 20px;
+    opacity: 0;
+  }
+}
+@keyframes exploding-stroke {
+  0% {
+    stroke-width: 2px;
+    opacity: 1;
+  }
+  100% {
+    stroke-width: 20px;
+    opacity: 0;
+  }
+}

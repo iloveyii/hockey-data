@@ -1,0 +1,162 @@
+<form class="needs-validation" novalidate id="form-product" action="/api/v1/products">
+    <h4 class="mb-3">Product</h4>
+    <div class="row g-3">
+        <div class="col-12">
+            <label for="name" class="form-label">Name</label>
+            <input
+                    type="text"
+                    class="form-control"
+                    id="name"
+                    name="product[name]"
+                    placeholder="Enter name of the product"
+                    value=""
+                    required
+            />
+            <div class="invalid-feedback">
+                Valid name is required.
+            </div>
+        </div>
+
+        <div class="col-12">
+            <label for="description" class="form-label">Description</label>
+            <textarea
+                    class="form-control"
+                    id="description"
+                    name="description"
+                    placeholder="Enter description of the product"
+                    value=""
+                    required
+                    rows="5"
+            ></textarea>
+            <div class="invalid-feedback">
+                Valid description is required.
+            </div>
+        </div>
+
+        <div class="col-sm-4">
+            <label for="price" class="form-label">Price</label>
+            <input
+                    type="text"
+                    class="form-control"
+                    id="price"
+                    name="price"
+                    placeholder="Type price"
+                    value=""
+                    required
+            />
+            <div class="invalid-feedback">
+                Valid price is required.
+            </div>
+        </div>
+
+        <div class="col-sm-4">
+            <label for="currency" class="form-label">Currency</label>
+            <input
+                    type="text"
+                    class="form-control"
+                    id="currency"
+                    name="currency"
+                    placeholder="Type currency"
+                    value=""
+                    required
+            />
+            <div class="invalid-feedback">
+                Valid currency is required.
+            </div>
+        </div>
+
+        <div class="col-sm-4">
+            <label for="stock" class="form-label">Stock</label>
+            <input
+                    type="text"
+                    class="form-control"
+                    id="stock"
+                    placeholder="Type stock"
+                    value=""
+                    required
+            />
+            <div class="invalid-feedback">
+                Valid stock is required.
+            </div>
+        </div>
+
+        <div class="col-12">
+            <label for="variation" class="form-label">Variation</label>
+            <input
+                    type="text"
+                    class="form-control"
+                    id="variation"
+                    placeholder="Variation of"
+                    value=""
+                    required
+            />
+            <div class="invalid-feedback">
+                Valid variation is required.
+            </div>
+        </div>
+
+    </div>
+
+
+    <button
+            class="btn btn-primary btn-lg btn-block mb-4 mt-5"
+            type="button"
+            id="save-form"
+    >
+        Save product
+    </button>
+</form>
+
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+            <%- include("_table.ejs") %>
+        </div>
+    </div>
+</div>
+
+<script>
+    function sendData(form) {
+        const XHR = new XMLHttpRequest();
+
+        // Bind the FormData object and the form element
+        //const FD = new FormData(form);
+
+        // Define what happens on successful data submission
+        XHR.addEventListener("load", function (event) {
+            // alert(event.target.responseText);
+            location.reload();
+        });
+
+        // Define what happens in case of error
+        XHR.addEventListener("error", function (event) {
+            alert('Oops! Something went wrong.');
+        });
+
+        // Set up our request
+        XHR.open("POST", "http://10.3.141.201:6600/api/v1/products");
+
+        // Add the required HTTP header for form data POST requests
+        XHR.setRequestHeader('Content-Type', 'application/json');
+
+        // Finally, send our data.
+        XHR.send(form);
+
+        // The data sent is what the user provided in the form
+        // XHR.send(FD);
+    }
+
+    document.getElementById("save-form").addEventListener("click", e => {
+        e.preventDefault();
+        //console.log("Saving form");
+        const form = document.getElementById("form-crud");
+        const product = {
+            product: {
+                name: document.getElementById("name").value,
+                price: document.getElementById("price").value,
+                currency: document.getElementById("currency").value
+            }
+        };
+        sendData(JSON.stringify(product));
+    });
+</script>
