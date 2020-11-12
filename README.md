@@ -195,6 +195,17 @@ Automated deployment using webhooks.
 - In this example we rename stats in json to stat and get a nested value
 
 ```
+// StatType
+const StatType = new GraphQLObjectType({
+  name: "Stat",
+  description: "Single Stat",
+  fields: {
+    TOI: { type: GraphQLString },
+    A: { type: GraphQLInt },
+    PTS: { type: GraphQLInt },
+  },
+});
+
 stat: {
       type: StatType,
       resolve: (parent, args) => ({
