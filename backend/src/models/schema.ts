@@ -22,6 +22,8 @@ const StatType = new GraphQLObjectType({
     TOI: { type: GraphQLString },
     A: { type: GraphQLInt },
     PTS: { type: GraphQLInt },
+    PIM: { type: GraphQLInt },
+    PM: { type: GraphQLInt },
   },
 });
 
@@ -47,6 +49,8 @@ const LogType = new GraphQLObjectType({
         TOI: parent.stats.TOI,
         A: parent.stats.A,
         PTS: parent.stats.PTS,
+        PIM: parent.stats.PIM,
+        PM: parent.stats.PM,
       }),
     },
   },
