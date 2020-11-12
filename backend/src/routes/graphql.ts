@@ -7,14 +7,22 @@ import { graphqlHTTP } from "express-graphql";
 
 const getIndex = (req: Request, res: Response, next: NextFunction) => {
   console.log("Inside getIndex");
-  return graphqlHTTP({
+  /* return graphqlHTTP({
     schema,
     graphiql: true,
-  });
+  }); */
+  res.json({ test: 1 });
 };
 
 const router = express.Router();
 router.route("/").get(
+  graphqlHTTP({
+    schema,
+    graphiql: true,
+  })
+);
+
+router.route("/").post(
   graphqlHTTP({
     schema,
     graphiql: true,

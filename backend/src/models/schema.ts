@@ -51,7 +51,11 @@ const RootQuery = new GraphQLObjectType({
   fields: {
     logs: {
       type: new GraphQLList(LogType),
-      resolve: () => axios.get(API_URL).then((res: any) => res.data.data),
+      resolve: () =>
+        axios.get(API_URL).then((res: any) => {
+          console.log(res.data.data);
+          return res.data.data;
+        }),
     },
   },
 });

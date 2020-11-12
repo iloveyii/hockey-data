@@ -40,7 +40,7 @@ app.use(express.json({ limit: "50mb" }));
 app.use(cors());
 app.use(compression());
 app.use(express.urlencoded({ limit: "50mb", extended: true }));
-app.use(express.static(path.resolve(__dirname, "../../", "frontend/dist")));
+app.use(express.static(path.resolve(__dirname, "public")));
 app.use(bodyParser.urlencoded({ limit: "50mb", extended: true }));
 app.use(bodyParser.json({ limit: "50mb" }));
 app.use(cors({ origin: "*", optionsSuccessStatus: 200 }));
@@ -79,13 +79,13 @@ app.use("/api/v1/logins", login);
 app.use("/api/v1/faults", fault);
 app.use("/api/v1/deploys", deploy);
 app.use("/api/v1/sensor_datas", sensor_data);
-app.use("/graphql", graphql);
+app.use("/graphql*", graphql);
 app.use("*", default_route);
 
 // ----------------------------------
 // Not found - 404
 // ----------------------------------
-app.use(notFound);
+// app.use(notFound);
 
 // ----------------------------------
 // Error handling
