@@ -29,6 +29,7 @@ import permission from "./routes/permission";
 import fault from "./routes/fault";
 import deploy from "./routes/deploy";
 import sensor_data from "./routes/sensor_data";
+import graphql from "./routes/graphql";
 import default_route from "./routes/default_route";
 
 // ----------------------------------
@@ -53,7 +54,7 @@ app.use(
 // ----------------------------------
 // Security - header
 // ----------------------------------
-app.use(helmet());
+app.use(helmet({ contentSecurityPolicy: false }));
 
 // ----------------------------------
 // Logging
@@ -78,6 +79,7 @@ app.use("/api/v1/logins", login);
 app.use("/api/v1/faults", fault);
 app.use("/api/v1/deploys", deploy);
 app.use("/api/v1/sensor_datas", sensor_data);
+app.use("/graphql", graphql);
 app.use("*", default_route);
 
 // ----------------------------------

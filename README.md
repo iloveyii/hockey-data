@@ -195,3 +195,6 @@ Automated deployment using webhooks.
   - Remove \*.js file for ts file
 - Module not found: Error: Can't resolve '@emotion/core'
   - Install `npm i --save @emotion/core @emotion/styled`
+- Node GraphQL Error
+  - `Refused to execute inline script because it violates the following Content Security Policy directive: "script-src 'self'"`
+  - Solution in app.ts - `app.use(helmet({ contentSecurityPolicy: false }));`
