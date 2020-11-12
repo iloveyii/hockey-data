@@ -19,7 +19,7 @@ const StatType = new GraphQLObjectType({
   name: "Stat",
   description: "Single Stat",
   fields: {
-    TOI: { type: GraphQLBoolean },
+    TOI: { type: GraphQLString },
     A: { type: GraphQLInt },
     PTS: { type: GraphQLInt },
   },
@@ -41,7 +41,14 @@ const LogType = new GraphQLObjectType({
   description: "Single Log",
   fields: {
     game: { type: GameType },
-    stat: { type: StatType },
+    stat: {
+      type: StatType,
+      resolve: (parent, args) => ({
+        TOI: parent.stats.TOI,
+        A: parent.stats.A,
+        PTS: parent.stats.PTS,
+      }),
+    },
   },
 });
 

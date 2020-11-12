@@ -189,6 +189,21 @@ Automated deployment using webhooks.
 - Validate data both on frontend and backend
 - Keep log of all important processes / operations
 
+# TIPS and TRICK
+
+- Some time you need to get a nested value in JSON or name the json key differently
+- In this example we rename stats in json to stat and get a nested value
+
+```
+stat: {
+      type: StatType,
+      resolve: (parent, args) => ({
+        TOI: parent.stats.TOI,
+        A: parent.stats.A,
+        PTS: parent.stats.PTS,
+      }),
+```
+
 # TROUBLESHOOTING
 
 - Error in DB connection `Emit skipped error #693`
