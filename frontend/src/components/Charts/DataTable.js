@@ -36,7 +36,13 @@ const rows = [
   { id: 9, lastName: "Roxie", firstName: "Harvey", age: 65 },
 ];
 
-export default function DataTable() {
+export default function DataTable({ shl }) {
+  const rows = shl.map((stat, i) => ({
+    id: 1,
+    lastName: "Snow",
+    firstName: "Jon",
+    age: JSON.stringify(stat),
+  }));
   return (
     <div style={{ height: 400, width: "100%" }}>
       <DataGrid rows={rows} columns={columns} pageSize={5} checkboxSelection />

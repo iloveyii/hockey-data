@@ -58,6 +58,7 @@ class Charts extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      shl: [],
       stats: {
         usage: {
           door: { onTime: 0 },
@@ -137,9 +138,19 @@ class Charts extends React.Component {
   }
 
   setForm(props) {
-    const { stats } = props;
+    const { stats, game_logs } = props;
     if (stats && stats.days && stats.weeks && stats.average) {
       this.setState({ stats });
+    }
+    if (game_logs) {
+      const actionsKeys = Object.keys(game_logs);
+      const key = actionsKeys[1];
+      const list = game_logs[key].res ? game_logs[key].res.list : [];
+      const stats = list.map((l) => l.stats);
+      console.log("Game log list", stats);
+      if (stats.length > 0) {
+        this.setState({ shl: stats });
+      }
     }
   }
 
@@ -256,7 +267,7 @@ class Charts extends React.Component {
                   <h4 className="card-title">Data table</h4>
                 </div>
                 <div className="card-body table-responsive">
-                  <DataTable />
+                  <DataTable shl={this.state.shl} />
                 </div>
               </div>
             </div>
@@ -285,6 +296,7 @@ const mapStateToProps = (state) => ({
     state.sensor_datas.list.length > 0 ? state.sensor_datas.list[0] : undefined,
   login: state.logins.list.length > 0 ? state.logins.list[0] : undefined,
   users: state.users.list.length > 0 ? state.users.list : [],
+  game_logs: state.game_logs.actions,
 });
 
 /**
