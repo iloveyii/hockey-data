@@ -9,10 +9,22 @@ import {
 } from "graphql";
 
 // API Url
-const API_URL =
-  "https://api.eliteprospects.com/v1/game-logs?apiKey=DR4bckuLj2g8BQnm5du5EkEd2w8QXCvX";
+const API_URL = "https://api.eliteprospects.com/v1";
+const API_KEY = "apiKey=DR4bckuLj2g8BQnm5du5EkEd2w8QXCvX";
+const apiUrl = (endPoint: string) => `${API_URL}/${endPoint}?${API_KEY}`;
 
-// DataType
+// TeamType
+const TeamType = new GraphQLObjectType({
+  name: "Team",
+  description: "A Single Team",
+  fields: {
+    id: { type: GraphQLInt },
+    name: { type: GraphQLString },
+    logo_url: { type: GraphQLString },
+    country_name: { type: GraphQLString },
+    flag_url: { type: GraphQLString },
+  },
+});
 
 // StatType
 const StatType = new GraphQLObjectType({
@@ -53,6 +65,28 @@ const LogType = new GraphQLObjectType({
         PM: parent.stats.PM,
       }),
     },
+    team: {
+      type: TeamType,
+      resolve: (parent, args) => ({
+        id: parent.team.id,
+        name: parent.team.name,
+        logo_url: async () => {
+          const id = parent.team.id;
+          const url = await axios
+            .get(apiUrl(`teams/${id}`))
+            .then((res: any) => res.data.data.logoUrl);
+          return url;
+        },
+        country_name: parent.team.country.name,
+        flag_url: async () => {
+          const link = parent.team.country._links[0];
+          const url = await axios
+            .get(link)
+            .then((res: any) => res.data.data.flagUrl.medium);
+          return url;
+        },
+      }),
+    },
   },
 });
 
@@ -63,7 +97,7 @@ const RootQuery = new GraphQLObjectType({
     logs: {
       type: new GraphQLList(LogType),
       resolve: () =>
-        axios.get(API_URL).then((res: any) => {
+        axios.get(apiUrl("game-logs")).then((res: any) => {
           console.log(res.data.data);
           return res.data.data;
         }),
