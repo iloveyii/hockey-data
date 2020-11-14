@@ -4,8 +4,7 @@ class GameLog extends ActiveRecord {
   constructor(name) {
     super(name);
     this._form = {};
-    this.server =
-      "https://api.eliteprospects.com/v1/game-logs?apiKey=DR4bckuLj2g8BQnm5du5EkEd2w8QXCvX";
+    this.server = "http://localhost:7700/graphql?";
   }
 
   rules() {

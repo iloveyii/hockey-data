@@ -7,18 +7,18 @@
 ###
 // Get a quiz
 GET http://localhost:6600/api/v1/quizzes/5f14a0a5606d694572f4882a
+
 Content-Type: application/json
 
 
 ###
 // Create a quiz for a user id
-POST http://localhost:6600/api/v1/quizzes
+POST http://localhost:7700/graphql
 Content-Type: application/json
 
 {
-  "quiz": {
-    "user_id": "5f158bd86afc3f09504bc3f0"
-  }
+  "query": "{ logs { game { id  date } stat {   TOI   PTS   A   PIM   PM } team {   id   logo_url   name   country_name   flag_url } }}"
+
 }
 
 ###

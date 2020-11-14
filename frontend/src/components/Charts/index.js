@@ -11,6 +11,8 @@ import { connect } from "react-redux";
 import { withRouter, Link } from "react-router-dom";
 
 const drawerWidth = 240;
+const query =
+  "{ logs { game { id  date } stat {   TOI   PTS   A   PIM   PM } team {   id   logo_url   name   country_name   flag_url } }}";
 
 const data = {
   days: {
@@ -142,20 +144,20 @@ class Charts extends React.Component {
     if (stats && stats.days && stats.weeks && stats.average) {
       this.setState({ stats });
     }
-    if (game_logs) {
-      const actionsKeys = Object.keys(game_logs);
-      const key = actionsKeys[1];
-      const list = game_logs[key].res ? game_logs[key].res.list : [];
-      const stats = list.map((l) => l.stats);
-      console.log("Game log list", stats);
-      if (stats.length > 0) {
-        this.setState({ shl: stats });
-      }
+    if (game_logs && Object.keys(game_logs).length > 0) {
+      Object.keys(game_logs).map((key) => {
+        const log = game_logs[key];
+        window.log = log;
+        if (log.req.method == "POST" && window.log.res) {
+          console.log("GameLog has response", key, window.log.res);
+        }
+      });
     }
   }
 
   componentDidMount() {
-    const { login, users, readAction } = this.props;
+    const { login, users, readAction, createAction } = this.props;
+    createAction({ query });
     if (login) {
       const user = users.find((u) => u.email === login.email);
       if (user && user.id) {
@@ -305,6 +307,7 @@ const mapStateToProps = (state) => ({
  */
 const mapActionsToProps = {
   readAction: models.sensor_datas.actions.read,
+  createAction: models.game_logs.actions.create,
 };
 
 export default withRouter(
