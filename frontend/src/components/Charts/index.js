@@ -60,7 +60,7 @@ class Charts extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      shl: [],
+      logs: [],
       stats: {
         usage: {
           door: { onTime: 0 },
@@ -148,8 +148,29 @@ class Charts extends React.Component {
       Object.keys(game_logs).map((key) => {
         const log = game_logs[key];
         window.log = log;
-        if (log.req.method == "POST" && window.log.res) {
-          console.log("GameLog has response", key, window.log.res);
+        localStorage.setItem("log", JSON.stringify(log));
+        if (log.req.method == "POST") {
+          console.log("GameLog with req.method == POST", key, window.log.res);
+          setTimeout(() => {
+            let { logs } = this.state;
+            if (Array.isArray(logs) && logs.length > 0) {
+              console.log(
+                "GameLog with req.method == POST and res - logs in state already",
+                key,
+                logs
+              );
+            } else {
+              if (log.res && log.res.list && log.res.list.logs) {
+                logs = log.res.list.logs;
+                console.log(
+                  "GameLog with req.method == POST and res set state",
+                  key,
+                  logs
+                );
+                this.setState({ logs });
+              }
+            }
+          }, 5000);
         }
       });
     }
@@ -269,7 +290,9 @@ class Charts extends React.Component {
                   <h4 className="card-title">Data table</h4>
                 </div>
                 <div className="card-body table-responsive">
-                  <DataTable shl={this.state.shl} />
+                  {this.state.logs.length > 0 && (
+                    <DataTable shl={this.state.logs} />
+                  )}
                 </div>
               </div>
             </div>

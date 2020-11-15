@@ -227,8 +227,8 @@ class Model {
         // Dealing with actions.req
         // ----------------------------------
         case this.types.read:
-          this.log("Inside Reducer read action is :  ");
-          this.log(action);
+          // this.log("Inside Reducer read action is :  ");
+          // this.log(action);
           var { id, type, form, list, method } = action.payload;
           // Place action in state's actions
           newState = { ...state };
@@ -261,10 +261,10 @@ class Model {
           newState = { ...state };
           const index = newState.list.findIndex((item) => item.id === form.id);
           if (index !== -1) {
-            console.log("UPDATE index: ", index, form, newState.list);
+            // console.log("UPDATE index: ", index, form, newState.list);
             newState.list[index] = form;
           } else {
-            console.log("UPDATE : ", form, newState.list);
+            // console.log("UPDATE : ", form, newState.list);
           }
           newState.actions[id] = {
             req: action.payload,
@@ -294,7 +294,7 @@ class Model {
         // Dealing with list and  actions.res
         // ----------------------------------
         case this.types.read_success:
-          console.log("READ/CREATE SUCCESS HERE - Dealing with list ", action);
+          // console.log("READ/CREATE SUCCESS HERE - Dealing with list ", action);
           var { id, type, status, form, list, errors } = action.payload;
           if (status === true) {
             // Put data in list
@@ -310,7 +310,7 @@ class Model {
             }
           } else {
             // Place res in action's res success === fail is on server side and not http error
-            console.log("ID not exist in actions");
+            // console.log("ID not exist in actions");
             newState = { ...state }; // there was an error (server side) therefore don't touch list and form
             if (newState.actions[id]) {
               newState.actions[id]["res"] = action.payload;
@@ -325,7 +325,7 @@ class Model {
         case this.types.create_success: // Clear form  - Put res in state
         case this.types.update_success: // Clear form - Put res in state
         case this.types.delete_success: //  Put res in state
-          console.log("DELETE SUCCESS HERE - Dealing with form ", action);
+          // console.log("DELETE SUCCESS HERE - Dealing with form ", action);
           var { id, type, status, form, list, errors } = action.payload;
           if (status === true) {
             // Put data in list
@@ -364,19 +364,19 @@ class Model {
         case this.types.delete_fail: // handle http exceptions
         case this.types.create_fail: // handle http exceptions
         case this.types.read_fail: // handle http exceptions
-          console.log("READ FAIL in redu", action);
+          // console.log("READ FAIL in redu", action);
           var { id, type, status, form, list, errors } = action.payload;
           // Place res in action's res success === fail is on server side and not http error
           newState = { ...state };
           if (newState.actions[id]) {
             newState.actions[id]["res"] = action.payload;
           } else {
-            console.log("Action with id not found", action);
+            // console.log("Action with id not found", action);
           }
           return newState;
 
         default:
-          this.log("Inside default reducer of class " + this.name);
+          // this.log("Inside default reducer of class " + this.name);
           return state;
       }
     };
@@ -389,20 +389,20 @@ class Model {
     const $this = this; // new Model('show');
 
     const create = function* (action) {
-      console.log("Action in saga", action.payload);
+      // console.log("Action in saga", action.payload);
       try {
         const response = yield call($this.api.create, action.payload);
-        console.log("CREATE ", response);
+        // console.log("CREATE ", response);
         if (response && typeof response === "object") {
           console.log("CREATE if", response);
           yield put($this.actions.create_success(action, response));
           // yield put($this.actions.read());
         } else {
-          console.log("CREATE fail", response);
+          // console.log("CREATE fail", response);
           yield put($this.actions.create_fail(action, response));
         }
       } catch (err) {
-        console.log("CREATE err", err);
+        // console.log("CREATE err", err);
         yield put($this.actions.create_fail(action, err.message));
       }
     };
@@ -411,13 +411,13 @@ class Model {
       try {
         const response = yield call($this.api.read, action.payload);
         if (response && typeof response === "object") {
-          console.log("READ saga data received ", response);
+          // console.log("READ saga data received ", response);
           yield put($this.actions.read_success(action, response));
         } else {
           yield put($this.actions.read_fail(action, response));
         }
       } catch (err) {
-        console.log("ERROR read : ", err.message);
+        // console.log("ERROR read : ", err.message);
         yield put($this.actions.read_fail(action, err.message));
       }
     };
@@ -426,13 +426,13 @@ class Model {
       try {
         const response = yield call($this.api.update, action.payload);
         if (response && typeof response === "object") {
-          console.log("UPDATE response ", action, response);
+          // console.log("UPDATE response ", action, response);
           yield put($this.actions.update_success(action, response));
         } else {
           yield put($this.actions.update_fail(action, response));
         }
       } catch (err) {
-        console.log(err);
+        // console.log(err);
         yield put($this.actions.update_fail(action, err.message));
       }
     };
@@ -440,7 +440,7 @@ class Model {
     const deleted = function* (action) {
       try {
         // IF reset
-        console.log("deleted saga ", action);
+        // console.log("deleted saga ", action);
         const response = yield call($this.api.delete, action.payload);
         if (response && typeof response === "object") {
           yield put($this.actions.delete_success(action, response));
@@ -464,14 +464,14 @@ class Model {
   get api() {
     return {
       read: (payload) => {
-        console.log("API read", payload);
+        // console.log("API read", payload);
         let suffix = payload.form.id ? `/${payload.form.id}` : "";
         suffix = payload.form.suffix ? payload.form.suffix : suffix;
         return axios
           .get(this.server + suffix)
           .then((res) => res.data)
           .catch((error) => {
-            console.dir(error);
+            // console.dir(error);
             throw new Error(error);
           });
       },
@@ -484,12 +484,12 @@ class Model {
             payload.action && payload.action(percentCompleted);
           },
         };
-        console.log("API create", payload);
+        // console.log("API create", payload);
         return axios
           .post(this.server, payload.form, config)
           .then((res) => res.data)
           .catch((error) => {
-            console.dir(error);
+            // console.dir(error);
             throw new Error(error);
           });
       },
@@ -498,18 +498,18 @@ class Model {
           .delete(this.server + "/" + payload.form.id)
           .then((res) => res.data)
           .catch((error) => {
-            console.dir(error);
+            // console.dir(error);
             throw new Error(error);
           }),
       update: (payload) => {
         return axios
           .put(this.server + "/" + payload.form.id, payload.form)
           .then((res) => {
-            console.log("Update response: ", res);
+            // console.log("Update response: ", res);
             return res.data;
           })
           .catch((error) => {
-            console.dir(error);
+            // console.dir(error);
             throw new Error(error);
           });
       },

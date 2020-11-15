@@ -18,6 +18,12 @@ const getPermissions = async (user: any) => {
   return model.response.success ? model.response.data : [];
 };
 
+export const getUser = async (req: Request, res: Response) => {
+  return res
+    .status(200)
+    .send({ success: true, data: [{ msg: "Get User dummy" }] });
+};
+
 // @desc   Make a user log in
 // @route  Post /api/v1/login
 export const loginUser = async (

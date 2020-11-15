@@ -37,7 +37,7 @@ function Dashboard(props) {
   const classes = useStyles();
   const { enqueueSnackbar } = useSnackbar();
   const { users, logins, doors, permissions } = props;
-  console.log("props", Object.keys(props));
+  // console.log("props", Object.keys(props));
   const usersResponses = models.users.errors(users.actions);
   const loginsResponses = models.logins.errors(logins.actions);
   const doorsResponses = models.doors.errors(doors.actions);
@@ -87,20 +87,20 @@ function Dashboard(props) {
   // Call method when ws send an update
   useEffect(() => {
     socket.on("update", (data) => {
-      console.log("Update", data);
+      // console.log("Update", data);
 
       if (data.url && data.url.includes("/api/v1/users")) {
-        console.log("Update USERS  ");
+        // console.log("Update USERS  ");
         props.usersReadAction({});
       }
 
       if (data.url && data.url.includes("/api/v1/doors")) {
-        console.log("Update DOORS  ");
+        // console.log("Update DOORS  ");
         props.doorsReadAction({});
       }
 
       if (data.url && data.url.includes("/api/v1/permissions")) {
-        console.log("Update PERMISSIONS  ");
+        // console.log("Update PERMISSIONS  ");
         props.permissionsReadAction({});
       }
     });

@@ -1,5 +1,7 @@
 import React, { useEffect } from "react";
 import { DataGrid } from "@material-ui/data-grid";
+import { ObjectID } from "bson";
+import { withStyles } from "@material-ui/styles";
 
 const columns = [
   {
@@ -63,7 +65,7 @@ const columns = [
   { id: 7, lastName: "Clifford", firstName: "Ferrara", age: 44 },
   { id: 8, lastName: "Frances", firstName: "Rossini", age: 36 },
  */
-const rows = [
+let rows = [
   {
     id: 1,
     game: {
@@ -77,9 +79,6 @@ const rows = [
       PIM: 2,
       PM: 1,
     },
-    team_name: "Luleå HF",
-    logo_url:
-      "https://files.eliteprospects.com/layout/logos/lulea_old_2018.png",
     team: {
       id: 19181,
       logo_url:
@@ -91,17 +90,65 @@ const rows = [
   },
 ];
 
-export default function DataTable({ shl }) {
-  //let rows = Array.isArray(shl) && shl.length > 0 ? shl : rows2;
-
-  /* useEffect(() => {
+export function DataTable2({ shl }) {
+  useEffect(() => {
     if (Array.isArray(shl) && shl.length > 0) {
-      rows = shl;
+      rows = shl.map((row, id) => ({ id: id + 1, ...row }));
+      console.log("GameLog shl of lenght", rows.length, rows);
+    } else {
+      console.log("GameLog shl ", shl);
     }
-  }, [shl]); */
+  }, [shl]);
   return (
     <div style={{ height: 400, width: "100%" }}>
-      <DataGrid rows={rows} columns={columns} pageSize={5} checkboxSelection />
+      {rows.length > 1 && (
+        <DataGrid
+          rows={rows}
+          columns={columns}
+          pageSize={5}
+          checkboxSelection
+        />
+      )}
+      {rows.length < 2 && <p>Rows Length {rows.length}</p>}
     </div>
   );
 }
+
+const styles = (theme) => ({
+  main: {
+    [theme.breakpoints.up("sm")]: {
+      width: `calc(100% - ${drawerWidth}px)`,
+      marginLeft: drawerWidth,
+    },
+  },
+  form: {
+    display: "flex",
+    flexDirection: "column",
+  },
+  row: {
+    backgroundColor: "red",
+  },
+});
+
+class DataTable extends React.Component {
+  componentDidMount() {
+    console.log("GameLog componentDidMount", this.props);
+  }
+  componentWillReceiveProps(nextProps, nextContext) {
+    console.log("GameLog componentWillReceiveProps", nextProps);
+  }
+  render() {
+    let { shl } = this.props;
+    shl = shl.map((row, id) => ({ id: id + 1, ...row }));
+    return (
+      <div style={{ height: 600, width: "100%" }}>
+        {shl.length > 1 && (
+          <DataGrid rows={shl} columns={columns} pageSize={80} />
+        )}
+        {shl.length < 2 && <p>Rows Length {shl.length}</p>}
+      </div>
+    );
+  }
+}
+
+export default DataTable;
