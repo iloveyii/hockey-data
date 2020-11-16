@@ -23,7 +23,6 @@ class Condition implements ConditionI {
   }
 
   get where(): ConditionT | any {
-    console.log(this.condition);
     return this.condition;
   }
 }
