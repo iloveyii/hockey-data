@@ -17,9 +17,10 @@ type StatsT = {
 
 type TeamT = {
   _id?: string;
+  id: number;
   team_id: number;
   name: string;
-  logo_url: string;
+  url: string;
   position?: number;
   stats?: StatsT;
 };
@@ -35,7 +36,7 @@ class Team extends Mongo {
     return {
       team_id: "required",
       name: "required",
-      logo_url: "required",
+      url: "required",
     };
   }
 }

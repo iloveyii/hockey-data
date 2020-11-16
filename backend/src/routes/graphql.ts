@@ -1,6 +1,6 @@
 import express from "express";
 import { Request, Response, NextFunction } from "express";
-import schema from "../models/schema";
+import schema from "../models/schema-teams";
 import path from "path";
 
 import { graphqlHTTP } from "express-graphql";

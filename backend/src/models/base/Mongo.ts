@@ -26,9 +26,8 @@ class Mongo implements ModelI {
   async create(): Promise<any> {
     const db = await this.database.db();
     const collection = await db.collection(this.collection);
-    this.data._id = new ObjectId(this.data.id);
+    // this.data._id = new ObjectId(this.data.id);
     const model = await collection.insertOne(this.data);
-    console.log("Created : ", model.ops[0]);
     this.setResponse(true, model.ops[0]);
     return this;
   }
@@ -99,16 +98,7 @@ class Mongo implements ModelI {
   // Class methods
   // ----------------------------------
   setResponse(success: boolean, data: any) {
-    // add id from _id
-    let newData = [];
-    if (!Array.isArray(data)) data = [data];
-    newData = data.map((d: any) => {
-      if (d._id) {
-        d["id"] = d._id;
-      }
-      return d;
-    });
-    this._response = { success: success, data: newData };
+    this._response = { success, data: Array.isArray(data) ? data : [data] };
   }
 
   get response(): ResponseT {
