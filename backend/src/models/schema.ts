@@ -1,207 +1,160 @@
+// ----------------------------------
+// Imoort packages
+// ----------------------------------
 import axios from "axios";
 import {
   GraphQLObjectType,
   GraphQLInt,
   GraphQLString,
-  GraphQLBoolean,
   GraphQLList,
   GraphQLSchema,
 } from "graphql";
+import dotenv from "dotenv";
+
 import Condition from "./base/Condition";
-import Country from "./Country";
 import Team from "./Team";
-import moment from "moment";
-import GameLog from "./GameLog";
-import { ModuleResolutionKind } from "typescript";
+import Logo from "./Logo";
+import { roundTimestamp } from "../utils";
 
-// API Url
-const API_URL = "https://api.eliteprospects.com/v1";
-const API_KEY = "apiKey=DR4bckuLj2g8BQnm5du5EkEd2w8QXCvX";
-const apiUrl = (endPoint: string) => `${API_URL}/${endPoint}?${API_KEY}`;
+// ----------------------------------
+// Environment setup - API Url
+// ----------------------------------
+dotenv.config({ path: ".env" });
+const {
+  ELITE_API_URL = "https://api.eliteprospects.com/v1",
+  ELITE_API_KEY = "apiKey=DR4bckuLj2g8BQnm5du5EkEd2w8QXCvX",
+  FRESHNESS_TIME_SECONDS = 1 * 60, // 1 min * 60 sec - API data fetch rate
+} = process.env;
+const apiUrl = (endPoint: string) =>
+  `${ELITE_API_URL}/${endPoint}?${ELITE_API_KEY}`;
 
-// Get Flag URL
-const getFlagUrl = async (country_name: string, link: string) => {
-  const model = new Country({ name: country_name, flag_url: "" });
-  const condition = new Condition({ where: { name: country_name } });
+// ----------------------------------
+// Get Logo url for Team from DB/API
+// ----------------------------------
+const getLogoUrl = async (id: number, name: string, type: string) => {
+  // Check DB first
+  const model = new Logo({ id, name, type });
+  const condition = new Condition({ where: { id, type } });
   await model.read(condition);
+
   if (model.response.success === true) {
-    console.log("Found :", country_name);
-    return model.response.data[0].flag_url;
+    // If data found in db
+    return model.response.data[0].url;
   }
 
-  const url = await axios.get(link).then(async (res: any) => {
-    const flag_url = res.data?.data?.flagUrl?.medium;
-    const model = new Country({ name: country_name, flag_url });
+  // If type is team-logo (more country-flat etc)
+  const url = await axios.get(apiUrl(`teams/${id}`)).then(async (res: any) => {
+    const url = res.data.data.logoUrl;
+    const model = new Logo({ id, name, type, url });
     (await model.validate()) && (await model.create());
-    console.log("Did not find ", model.response);
-    return flag_url;
+    return url;
   });
   return url;
 };
 
-// Get Team Logo URL
-const getTeamLogoUrl = async (team_id: number, name: string) => {
-  const model = new Team({ team_id, name, logo_url: "" });
-  const condition = new Condition({ where: { team_id } });
-  await model.read(condition);
+// ----------------------------------
+// Get TeamLog from DB/API
+// ----------------------------------
+const getTeamLog = async () => {
+  // timestamp to save with db record
+  const timestamp = roundTimestamp(Number(FRESHNESS_TIME_SECONDS));
+  // Check DB first
+  const model = new Team(undefined);
+  const condition = new Condition({ where: { timestamp } });
+  await model.read(condition, { position: -1 });
   if (model.response.success === true) {
-    console.log("Found team:", team_id);
-    return model.response.data[0].logo_url;
+    // If data found in db
+    return model.response.data;
   }
 
-  const url = await axios
-    .get(apiUrl(`teams/${team_id}`))
-    .then(async (res: any) => {
-      const logo_url = res.data.data.logoUrl;
-      const model = new Team({ team_id, name, logo_url });
-      (await model.validate()) && (await model.create());
-      console.log("Did not find ", model.response);
-      return logo_url;
-    });
-  return url;
-};
-
-// Get GameLog
-const getGameLog = async () => {
-  const date = moment(new Date()).format("YYYY-MM-DD");
-  const model = new GameLog(undefined);
-  const condition = new Condition({ where: { date } });
-  await model.read(condition);
-  if (model.response.success === true) {
-    console.log("GameLog exists for date", date, model.response.data[0]);
-    return model.response.data[0];
-  }
-
-  await axios.get(apiUrl("game-logs")).then(async (res: any) => {
-    console.log("Made req");
+  // Finally make API call
+  return await axios.get(apiUrl("team-stats")).then(async (res: any) => {
     const data = res.data.data;
-    const gameLog = data.map(async (d: any) => {
-      const game = {
-        game_id: d.game.id,
-        date: d.game.date,
-        date_time: d.game.date_time,
-        season: {
-          slug: d.game.season.slug,
-          startYear: d.game.season.startYear,
-          endYear: d.game.season.endYear,
-          type: d.game.seasonType,
-        },
-        league: {
-          slug: d.game.league.slug,
-          name: d.game.league.name,
-          class: d.game.league.teamClass,
-        },
-        team: {
-          id: d.team.id,
-          name: d.team.name,
-          country: d.team.country.name,
-          class: d.team.teamClass,
-          type: d.team.teamType,
-        },
-        stats: {
-          TOI: d.stats.TOI,
-          SOG: d.stats.SOG,
-          G: d.stats.G,
-          A: d.stats.A,
-          PTS: d.stats.PTS,
-          PIM: d.stats.PIM,
-          PM: d.stats.PM,
-          PPG: d.stats.PPG,
-          SHG: d.stats.SHG,
-        },
-      };
-      const model = new GameLog(game);
-      (await model.validate()) && (await model.create());
-      console.log("Game ", game);
-      return game;
+    const requests = data.map((d: any) => {
+      return new Promise((resolve: any, reject: any) => {
+        getLogoUrl(d.team.id, d.team.name, "team-logo").then((url: string) => {
+          const { id, position } = d;
+          const { id: team_id, name } = d.team;
+          const { GP, W, L, T, OTW, OTL, PTS, GF, GA, GD } = d.stats;
+          const team = {
+            id,
+            team_id,
+            name,
+            url,
+            position: position ? position : 0,
+            stat: { GP, W, L, T, OTW, OTL, PTS, GF, GA, GD },
+            timestamp,
+          };
+          resolve(team);
+        });
+      });
     });
-    return gameLog;
+
+    // Let all the promises complete
+    const teams = await Promise.all(requests);
+    // Sort on position
+    teams.sort((a: any, b: any) =>
+      Number(a.position) > Number(b.position) ? -1 : 1
+    );
+    // Save to DB
+    teams.map(async (team: any) => {
+      const model = new Team(team);
+      if (await model.validate()) {
+        const condition = new Condition({ where: { id: team.id, timestamp } });
+        await model.createIfNotExist(condition);
+      }
+    });
+
+    return teams;
   });
 };
 
-// TeamType
-const TeamType = new GraphQLObjectType({
-  name: "Team",
-  description: "A Single Team",
-  fields: {
-    id: { type: GraphQLInt },
-    name: { type: GraphQLString },
-    logo_url: { type: GraphQLString },
-    country_name: { type: GraphQLString },
-    flag_url: { type: GraphQLString },
-  },
-});
-
-// StatType
+// ----------------------------------
+// Get StatType
+// ----------------------------------
 const StatType = new GraphQLObjectType({
   name: "Stat",
-  description: "Single Stat",
+  description: "A single Stat",
   fields: {
-    TOI: { type: GraphQLString },
-    A: { type: GraphQLInt },
+    GP: { type: GraphQLInt },
+    W: { type: GraphQLInt },
+    L: { type: GraphQLInt },
+    T: { type: GraphQLInt },
+    OTW: { type: GraphQLInt },
+    OTL: { type: GraphQLInt },
     PTS: { type: GraphQLInt },
-    PIM: { type: GraphQLInt },
-    PM: { type: GraphQLInt },
+    GF: { type: GraphQLInt },
+    GA: { type: GraphQLInt },
+    GD: { type: GraphQLInt },
   },
 });
 
-// GameType
-const GameType = new GraphQLObjectType({
-  name: "Game",
-  description: "Single Game",
+// ----------------------------------
+// Get TeamType
+// ----------------------------------
+const TeamType = new GraphQLObjectType({
+  name: "Team",
+  description: "A single Team",
   fields: {
     id: { type: GraphQLInt },
-    date: { type: GraphQLString },
+    team_id: { type: GraphQLInt },
+    name: { type: GraphQLString },
+    url: { type: GraphQLString },
+    position: { type: GraphQLInt },
+    stat: { type: StatType },
+    timestamp: { type: GraphQLString },
   },
 });
 
-// LogType
-const LogType = new GraphQLObjectType({
-  name: "Log",
-  description: "Single Log",
-  fields: {
-    game: { type: GameType },
-    stat: {
-      type: StatType,
-      resolve: (parent, args) => ({
-        TOI: parent.stats.TOI,
-        A: parent.stats.A,
-        PTS: parent.stats.PTS,
-        PIM: parent.stats.PIM,
-        PM: parent.stats.PM,
-      }),
-    },
-    team: {
-      type: TeamType,
-      resolve: (parent, args) => ({
-        id: parent.team.id,
-        name: parent.team.name,
-        logo_url: async () => {
-          const id = parent.team.id;
-          const name = parent.team.name;
-          return await getTeamLogoUrl(id, name);
-        },
-        country_name: parent.team.country.name,
-        flag_url: async () => {
-          const link = parent.team.country._links[0];
-          const country_name = parent.team.country.name;
-          return await getFlagUrl(country_name, link);
-        },
-      }),
-    },
-  },
-});
-
+// ----------------------------------
 // Root Query
+// ----------------------------------
 const RootQuery = new GraphQLObjectType({
   name: "RootQueryType",
   fields: {
     logs: {
-      type: new GraphQLList(LogType),
-      resolve: async () => {
-        console.log("GetGame Log");
-        return await getGameLog();
-      },
+      type: new GraphQLList(TeamType),
+      resolve: async () => await getTeamLog(),
     },
   },
 });
