@@ -14,7 +14,7 @@ import moment from "moment";
 import Logo from "./Logo";
 import { roundTimestamp } from "../utils";
 
-const FRESHNESS_TIME_SECONDS = 5 * 60; // 5 min
+const FRESHNESS_TIME_SECONDS = 1 * 10; // 5 min
 
 // API Url
 const API_URL = "https://api.eliteprospects.com/v1";
@@ -70,7 +70,7 @@ const getTeamLog = async () => {
     );
   }
 
-  await axios.get(apiUrl("team-stats")).then(async (res: any) => {
+  return await axios.get(apiUrl("team-stats")).then(async (res: any) => {
     console.log("Made req");
     const data = res.data.data;
     const teamLog = data.map(async (d: any, i: number) => {
