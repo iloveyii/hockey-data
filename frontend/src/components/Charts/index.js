@@ -14,15 +14,13 @@ const drawerWidth = 240;
 const query = `
   {
     logs {
-      
       id
       team_id
       name
       url
       position
       stat {
-        GP
-        PTS
+      GP, W, L, T, OTW, OTL, PTS, GF, GA, GD
       } 
       timestamp
     }

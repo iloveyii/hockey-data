@@ -73,28 +73,35 @@ const getTeamLog = async () => {
   return await axios.get(apiUrl("team-stats")).then(async (res: any) => {
     console.log("Made req");
     const data = res.data.data;
-    const teamLog = data.map(async (d: any, i: number) => {
-      const team = {
-        id: d.id,
-        team_id: d.team.id,
-        name: d.team.name,
-        url: await getLogoUrl(d.team.id, d.team.name, "team-logo"),
-        position: d.position,
+    const requests = data.map((d: any) => {
+      return new Promise((resolve: any, reject: any) => {
+        getLogoUrl(d.team.id, d.team.name, "team-logo").then((url: string) => {
+          const { id, position } = d;
+          const { id: team_id, name } = d.team;
+          const { GP, W, L, T, OTW, OTL, PTS, GF, GA, GD } = d.stats;
+          const team = {
+            id,
+            team_id,
+            name,
+            url,
+            position: position ? position : 0,
+            stat: { GP, W, L, T, OTW, OTL, PTS, GF, GA, GD },
+            timestamp,
+          };
+          resolve(team);
+        });
+      });
+    });
 
-        stat: {
-          GP: d.stats.GP,
-          W: d.stats.W,
-          L: d.stats.L,
-          T: d.stats.T,
-          OTW: d.stats.OTW,
-          OTL: d.stats.OTL,
-          PTS: d.stats.PTS,
-          GF: d.stats.GF,
-          GA: d.stats.GA,
-          GD: d.stats.GD,
-        },
-        timestamp: timestamp,
-      };
+    // Let all the promises complete
+    const teams = await Promise.all(requests);
+    console.log("teams :: ", teams.slice(0, 1));
+    // Sort on position
+    teams.sort((a: any, b: any) =>
+      Number(a.position) > Number(b.position) ? -1 : 1
+    );
+    // Save to DB
+    teams.map(async (team: any) => {
       const model = new Team(team);
       if (await model.validate()) {
         const condition = new Condition({ where: { id: team.id, timestamp } });
@@ -102,13 +109,9 @@ const getTeamLog = async () => {
       } else {
         console.log("Cannot validate : ", model.response.data[0]);
       }
-      if (i < 1) {
-        console.log("Game ", team);
-      }
-      return team;
     });
 
-    return teamLog;
+    return teams;
   });
 };
 
