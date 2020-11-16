@@ -6,11 +6,15 @@ import {
   GraphQLBoolean,
   GraphQLList,
   GraphQLSchema,
+  GraphQLScalarType,
 } from "graphql";
 import Condition from "./base/Condition";
 import Team from "./Team";
 import moment from "moment";
 import Logo from "./Logo";
+import { roundTimestamp } from "../utils";
+
+const FRESHNESS_TIME_SECONDS = 5 * 60; // 5 min
 
 // API Url
 const API_URL = "https://api.eliteprospects.com/v1";
@@ -25,7 +29,6 @@ const getLogoUrl = async (id: number, name: string, type: string) => {
   await model.read(condition);
 
   if (model.response.success === true) {
-    console.log("Found Logo for id:", id, model.response.data[0].url);
     return model.response.data[0].url;
   }
 
@@ -47,13 +50,24 @@ const getLogoUrl = async (id: number, name: string, type: string) => {
 
 // Get TeamLog
 const getTeamLog = async () => {
-  const date = moment(new Date()).format("YYYY-MM-DD");
+  const timestamp = roundTimestamp(FRESHNESS_TIME_SECONDS);
+
   const model = new Team(undefined);
-  const condition = new Condition({ where: { date } });
-  await model.read(); // ToDO
-  if (false && model.response.success === true) {
-    console.log("GameLog exists for date", date, model.response.data[0]);
-    return model.response.data[0];
+  const condition = new Condition({ where: { timestamp } });
+  await model.read(condition, { position: -1 });
+  if (model.response.success === true) {
+    console.log(
+      "TeamLog exists for timestamp",
+      timestamp,
+      model.response.data.slice(0, 1)
+    );
+    return model.response.data;
+  } else {
+    console.log(
+      "TeamLog does not exist for timestamp ",
+      timestamp,
+      condition.where
+    );
   }
 
   await axios.get(apiUrl("team-stats")).then(async (res: any) => {
@@ -65,9 +79,9 @@ const getTeamLog = async () => {
         team_id: d.team.id,
         name: d.team.name,
         url: await getLogoUrl(d.team.id, d.team.name, "team-logo"),
-        position: d.team.teamClass,
+        position: d.position,
 
-        stats: {
+        stat: {
           GP: d.stats.GP,
           W: d.stats.W,
           L: d.stats.L,
@@ -79,19 +93,31 @@ const getTeamLog = async () => {
           GA: d.stats.GA,
           GD: d.stats.GD,
         },
+        timestamp: timestamp,
       };
       const model = new Team(team);
       if (await model.validate()) {
-        await model.create();
+        const condition = new Condition({ where: { id: team.id, timestamp } });
+        await model.createIfNotExist(condition);
       } else {
         console.log("Cannot validate : ", model.response.data[0]);
       }
-      if (i < 3) {
+      if (i < 1) {
         console.log("Game ", team);
       }
       return team;
     });
+
     return teamLog;
+  });
+};
+
+const resolveInFiveSeconds = (teamLog: any) => {
+  return new Promise((resolve) => {
+    setTimeout(() => {
+      console.log("REsolved, ", teamLog.slice(0, 2));
+      return resolve(teamLog);
+    }, 5000);
   });
 };
 
@@ -124,6 +150,7 @@ const TeamType = new GraphQLObjectType({
     url: { type: GraphQLString },
     position: { type: GraphQLInt },
     stat: { type: StatType },
+    timestamp: { type: GraphQLString },
   },
 });
 

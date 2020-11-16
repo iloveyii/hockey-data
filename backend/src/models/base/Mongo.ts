@@ -32,6 +32,18 @@ class Mongo implements ModelI {
     return this;
   }
 
+  /**
+   * Will create if model does not exist based on provide condition
+   * @param condition - Find criteria
+   */
+  async createIfNotExist(condition: ConditionI): Promise<any> {
+    await this.read(condition);
+    if (!this.response.success) {
+      await this.create();
+    }
+    return this;
+  }
+
   async read(condition?: ConditionI, sort?: any) {
     const db = await this.database.db();
     const collection = await db.collection(this.collection);

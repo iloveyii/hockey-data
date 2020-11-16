@@ -23,6 +23,7 @@ type TeamT = {
   url: string;
   position?: number;
   stats?: StatsT;
+  timestamp: number;
 };
 
 const COLLECTION = "teams";
