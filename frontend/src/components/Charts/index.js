@@ -11,8 +11,23 @@ import { connect } from "react-redux";
 import { withRouter, Link } from "react-router-dom";
 
 const drawerWidth = 240;
-const query =
-  "{ logs { game { id  date } stat {   TOI   PTS   A   PIM   PM } team {   id   logo_url   name   country_name   flag_url } }}";
+const query = `
+  {
+    logs {
+      
+      id
+      team_id
+      name
+      url
+      position
+      stat {
+        GP
+        PTS
+      } 
+      timestamp
+    }
+  }
+`;
 
 const data = {
   days: {
