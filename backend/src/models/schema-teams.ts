@@ -14,7 +14,8 @@ import moment from "moment";
 import Logo from "./Logo";
 import { roundTimestamp } from "../utils";
 
-const FRESHNESS_TIME_SECONDS = 1 * 10; // 5 min
+// API data fetch rate
+const FRESHNESS_TIME_SECONDS = 1 * 60; // 1 min * 60 sec
 
 // API Url
 const API_URL = "https://api.eliteprospects.com/v1";
@@ -23,26 +24,21 @@ const apiUrl = (endPoint: string) => `${API_URL}/${endPoint}?${API_KEY}`;
 
 // Get Team Logo URL
 const getLogoUrl = async (id: number, name: string, type: string) => {
+  // Check DB first
   const model = new Logo({ id, name, type });
   const condition = new Condition({ where: { id, type } });
-
   await model.read(condition);
 
   if (model.response.success === true) {
+    // If data found in db
     return model.response.data[0].url;
   }
 
-  // If type is team-logo
-  console.log(apiUrl(`teams/${id}`));
+  // If type is team-logo (more country-flat etc)
   const url = await axios.get(apiUrl(`teams/${id}`)).then(async (res: any) => {
     const url = res.data.data.logoUrl;
     const model = new Logo({ id, name, type, url });
-    if (await model.validate()) {
-      await model.create();
-    } else {
-      console.log("Cannot validate ", model.response, res.data);
-    }
-    console.log("Did not find logo with id ", id, type, condition.where);
+    (await model.validate()) && (await model.create());
     return url;
   });
   return url;
@@ -50,28 +46,19 @@ const getLogoUrl = async (id: number, name: string, type: string) => {
 
 // Get TeamLog
 const getTeamLog = async () => {
+  // timestamp to save with db record
   const timestamp = roundTimestamp(FRESHNESS_TIME_SECONDS);
-
+  // Check DB first
   const model = new Team(undefined);
   const condition = new Condition({ where: { timestamp } });
   await model.read(condition, { position: -1 });
   if (model.response.success === true) {
-    console.log(
-      "TeamLog exists for timestamp",
-      timestamp,
-      model.response.data.slice(0, 1)
-    );
+    // If data found in db
     return model.response.data;
-  } else {
-    console.log(
-      "TeamLog does not exist for timestamp ",
-      timestamp,
-      condition.where
-    );
   }
 
+  // Finally make API call
   return await axios.get(apiUrl("team-stats")).then(async (res: any) => {
-    console.log("Made req");
     const data = res.data.data;
     const requests = data.map((d: any) => {
       return new Promise((resolve: any, reject: any) => {
@@ -95,7 +82,6 @@ const getTeamLog = async () => {
 
     // Let all the promises complete
     const teams = await Promise.all(requests);
-    console.log("teams :: ", teams.slice(0, 1));
     // Sort on position
     teams.sort((a: any, b: any) =>
       Number(a.position) > Number(b.position) ? -1 : 1
@@ -106,21 +92,10 @@ const getTeamLog = async () => {
       if (await model.validate()) {
         const condition = new Condition({ where: { id: team.id, timestamp } });
         await model.createIfNotExist(condition);
-      } else {
-        console.log("Cannot validate : ", model.response.data[0]);
       }
     });
 
     return teams;
-  });
-};
-
-const resolveInFiveSeconds = (teamLog: any) => {
-  return new Promise((resolve) => {
-    setTimeout(() => {
-      console.log("REsolved, ", teamLog.slice(0, 2));
-      return resolve(teamLog);
-    }, 5000);
   });
 };
 
@@ -163,10 +138,7 @@ const RootQuery = new GraphQLObjectType({
   fields: {
     logs: {
       type: new GraphQLList(TeamType),
-      resolve: async () => {
-        console.log("GetTeam Log");
-        return await getTeamLog();
-      },
+      resolve: async () => await getTeamLog(),
     },
   },
 });
