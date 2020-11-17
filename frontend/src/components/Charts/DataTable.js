@@ -22,7 +22,10 @@ const columns = [
   {
     field: "GP",
     headerName: "GP",
-    // type: "number",
+    sortable: true,
+    sortComparator: (v1, v2, row1, row2) =>
+      row1.data.stat?.GP - row2.data.stat?.GP,
+    type: "number",
     width: 90,
     valueGetter: (params) => params.getValue("stat").GP,
   },
@@ -30,62 +33,87 @@ const columns = [
     field: "W",
     headerName: "W",
     width: 90,
+    sortable: true,
+    sortComparator: (v1, v2, row1, row2) =>
+      row1.data.stat?.W - row2.data.stat?.W,
+    type: "number",
     valueGetter: (params) => params.getValue("stat").W,
   },
   {
     field: "L",
     headerName: "L",
-    width: 90,
+    width: 120,
+    sortable: true,
+    sortComparator: (v1, v2, row1, row2) =>
+      row1.data.stat?.L - row2.data.stat?.L,
+    type: "number",
     valueGetter: (params) => params.getValue("stat").L,
   },
   {
     field: "T",
     headerName: "T",
-    width: 90,
+    width: 50,
+    sortable: true,
+    sortComparator: (v1, v2, row1, row2) =>
+      row1.data.stat?.T - row2.data.stat?.T,
+    type: "number",
     valueGetter: (params) =>
       params.getValue("stat").T ? params.getValue("stat").T : "-",
   },
   {
     field: "OTW",
     headerName: "OTW",
-    width: 90,
-    sortable: false,
+    width: 50,
+    sortable: true,
+    sortComparator: (v1, v2, row1, row2) =>
+      row1.data.stat?.OTW - row2.data.stat?.OTW,
+    type: "number",
     valueGetter: (params) => params.getValue("stat").OTW,
   },
   {
     field: "OTL",
     headerName: "OTL",
-    width: 90,
-    sortable: false,
+    width: 50,
+    sortable: true,
+    sortComparator: (v1, v2, row1, row2) =>
+      row1.data.stat?.OTL - row2.data.stat?.OTL,
+    type: "number",
     valueGetter: (params) => params.getValue("stat").OTL,
   },
   {
     field: "GF",
     headerName: "GF",
-    width: 90,
+    width: 50,
     sortable: true,
+    sortComparator: (v1, v2, row1, row2) =>
+      row1.data.stat?.GF - row2.data.stat?.GF,
+    type: "number",
     valueGetter: (params) => params.getValue("stat").GF,
   },
   {
     field: "GA",
     headerName: "GA",
-    width: 90,
+    width: 50,
     sortable: true,
+    sortComparator: (v1, v2, row1, row2) =>
+      row1.data.stat?.GA - row2.data.stat?.GA,
+    type: "number",
     valueGetter: (params) => params.getValue("stat").GA,
   },
   {
     field: "GD",
     headerName: "GD",
-    width: 90,
-    sortable: false,
-    //  sortComparator: (v1, v2, row1, row2) =>       Number(row1.stat.GD) - Number(row2.stat.GD),
+    width: 50,
+    sortable: true,
+    sortComparator: (v1, v2, row1, row2) =>
+      row1.data.stat?.GD - row2.data.stat?.GD,
     type: "number",
     valueGetter: (params) => `${params.getValue("stat").GD}`,
   },
   {
     field: "position",
     headerName: "POS",
-    width: 90,
+    width: 50,
     type: "number",
     sortable: true,
   },
@@ -126,9 +154,7 @@ class DataTable extends React.Component {
     shl = shl.map((row, i) => ({ ...row, id: i + 1 }));
     return (
       <div style={{ height: 600, width: "100%" }}>
-        {shl.length > 1 && (
-          <DataGrid sortModel={sortModel} rows={shl} columns={columns} />
-        )}
+        {shl.length > 1 && <DataGrid rows={shl} columns={columns} />}
         {shl.length < 2 && <p>Rows Length {shl.length}</p>}
       </div>
     );
