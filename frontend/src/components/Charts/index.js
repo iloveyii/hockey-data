@@ -299,8 +299,13 @@ class Charts extends React.Component {
           <div className="row">
             <div className="col-lg-12 col-md-12">
               <div className="card">
-                <div className={"card-header card-header-info"}>
-                  <h4 className="card-title">Data table</h4>
+                <div
+                  className={"card-header card-header-info"}
+                  style={{ backgroundColor: "#063950" }}
+                >
+                  <h4 className="card-title">
+                    <img src="/images/ep-logo.svg" height="50" />
+                  </h4>
                 </div>
                 <div className="card-body table-responsive">
                   {this.state.logs.length > 0 && (

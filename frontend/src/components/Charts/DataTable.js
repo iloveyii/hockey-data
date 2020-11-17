@@ -137,7 +137,7 @@ const styles = (theme) => ({
 
 const sortModel = [
   {
-    field: "GD",
+    field: "position",
     sort: "asc",
   },
 ];
@@ -148,7 +148,9 @@ class DataTable extends React.Component {
     shl = shl.map((row, i) => ({ ...row, id: i + 1 }));
     return (
       <div style={{ height: 750, width: "100%" }}>
-        {shl.length > 1 && <DataGrid rows={shl} columns={columns} />}
+        {shl.length > 1 && (
+          <DataGrid sortModel={sortModel} rows={shl} columns={columns} />
+        )}
         {shl.length < 2 && <p>Rows Length {shl.length}</p>}
       </div>
     );

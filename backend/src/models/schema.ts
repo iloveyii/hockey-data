@@ -66,6 +66,7 @@ const getTeamLog = async () => {
   await model.read(condition, { position: 1 });
   if (model.response.success === true) {
     // If data found in db
+    console.log("Data from db");
     return model.response.data?.slice(0, Number(ARRAY_SIZE));
   }
 
@@ -83,7 +84,7 @@ const getTeamLog = async () => {
             team_id,
             name,
             url,
-            position: position ? position : 1000,
+            position: position ? Number(position) : 1000,
             stat: { GP, W, L, T, OTW, OTL, PTS, GF, GA, GD },
             timestamp,
           };
@@ -107,6 +108,7 @@ const getTeamLog = async () => {
       }
     });
 
+    console.log("Data from API");
     return teams.slice(0, Number(ARRAY_SIZE));
   });
 };
