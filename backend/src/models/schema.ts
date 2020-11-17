@@ -15,6 +15,7 @@ import Condition from "./base/Condition";
 import Team from "./Team";
 import Logo from "./Logo";
 import { roundTimestamp } from "../utils";
+import { ARRAY } from "sequelize";
 
 // ----------------------------------
 // Environment setup - API Url
@@ -24,6 +25,7 @@ const {
   ELITE_API_URL = "https://api.eliteprospects.com/v1",
   ELITE_API_KEY = "apiKey=DR4bckuLj2g8BQnm5du5EkEd2w8QXCvX",
   FRESHNESS_TIME_SECONDS = 1 * 60, // 1 min * 60 sec - API data fetch rate
+  ARRAY_SIZE = 12,
 } = process.env;
 const apiUrl = (endPoint: string) =>
   `${ELITE_API_URL}/${endPoint}?${ELITE_API_KEY}`;
@@ -64,7 +66,7 @@ const getTeamLog = async () => {
   await model.read(condition, { position: -1 });
   if (model.response.success === true) {
     // If data found in db
-    return model.response.data?.slice(0, 20);
+    return model.response.data?.slice(0, Number(ARRAY_SIZE));
   }
 
   // Finally make API call
@@ -105,7 +107,7 @@ const getTeamLog = async () => {
       }
     });
 
-    return teams.slice(0, 20);
+    return teams.slice(0, Number(ARRAY_SIZE));
   });
 };
 

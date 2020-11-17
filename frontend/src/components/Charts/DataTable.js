@@ -7,13 +7,13 @@ const columns = [
   {
     field: "id",
     headerName: "ID",
-    width: 70,
+    width: 80,
   },
   { field: "name", headerName: "Team", width: 130 },
   {
     field: "url",
     headerName: "Logo",
-    width: 130,
+    width: 120,
     renderCell: (params) => {
       const url = params.getValue("url");
       return <img style={{ height: "40px" }} src={url} />;
@@ -26,13 +26,13 @@ const columns = [
     sortComparator: (v1, v2, row1, row2) =>
       row1.data.stat?.GP - row2.data.stat?.GP,
     type: "number",
-    width: 90,
+    width: 80,
     valueGetter: (params) => params.getValue("stat").GP,
   },
   {
     field: "W",
     headerName: "W",
-    width: 90,
+    width: 70,
     sortable: true,
     sortComparator: (v1, v2, row1, row2) =>
       row1.data.stat?.W - row2.data.stat?.W,
@@ -42,7 +42,7 @@ const columns = [
   {
     field: "L",
     headerName: "L",
-    width: 120,
+    width: 70,
     sortable: true,
     sortComparator: (v1, v2, row1, row2) =>
       row1.data.stat?.L - row2.data.stat?.L,
@@ -52,7 +52,7 @@ const columns = [
   {
     field: "T",
     headerName: "T",
-    width: 50,
+    width: 70,
     sortable: true,
     sortComparator: (v1, v2, row1, row2) =>
       row1.data.stat?.T - row2.data.stat?.T,
@@ -63,7 +63,7 @@ const columns = [
   {
     field: "OTW",
     headerName: "OTW",
-    width: 50,
+    width: 100,
     sortable: true,
     sortComparator: (v1, v2, row1, row2) =>
       row1.data.stat?.OTW - row2.data.stat?.OTW,
@@ -73,7 +73,7 @@ const columns = [
   {
     field: "OTL",
     headerName: "OTL",
-    width: 50,
+    width: 100,
     sortable: true,
     sortComparator: (v1, v2, row1, row2) =>
       row1.data.stat?.OTL - row2.data.stat?.OTL,
@@ -83,7 +83,7 @@ const columns = [
   {
     field: "GF",
     headerName: "GF",
-    width: 50,
+    width: 80,
     sortable: true,
     sortComparator: (v1, v2, row1, row2) =>
       row1.data.stat?.GF - row2.data.stat?.GF,
@@ -93,7 +93,7 @@ const columns = [
   {
     field: "GA",
     headerName: "GA",
-    width: 50,
+    width: 80,
     sortable: true,
     sortComparator: (v1, v2, row1, row2) =>
       row1.data.stat?.GA - row2.data.stat?.GA,
@@ -103,7 +103,7 @@ const columns = [
   {
     field: "GD",
     headerName: "GD",
-    width: 50,
+    width: 80,
     sortable: true,
     sortComparator: (v1, v2, row1, row2) =>
       row1.data.stat?.GD - row2.data.stat?.GD,
@@ -113,7 +113,7 @@ const columns = [
   {
     field: "position",
     headerName: "POS",
-    width: 50,
+    width: 90,
     type: "number",
     sortable: true,
   },
@@ -153,7 +153,7 @@ class DataTable extends React.Component {
     let { shl } = this.props;
     shl = shl.map((row, i) => ({ ...row, id: i + 1 }));
     return (
-      <div style={{ height: 600, width: "100%" }}>
+      <div style={{ height: 750, width: "100%" }}>
         {shl.length > 1 && <DataGrid rows={shl} columns={columns} />}
         {shl.length < 2 && <p>Rows Length {shl.length}</p>}
       </div>
