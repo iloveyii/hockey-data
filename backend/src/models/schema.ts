@@ -15,7 +15,6 @@ import Condition from "./base/Condition";
 import Team from "./Team";
 import Logo from "./Logo";
 import { roundTimestamp } from "../utils";
-import { ARRAY } from "sequelize";
 
 // ----------------------------------
 // Environment setup - API Url

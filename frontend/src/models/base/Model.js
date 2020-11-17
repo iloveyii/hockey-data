@@ -65,7 +65,10 @@ class Model {
         payload: {
           id: action.payload.id,
           type: action.payload.type,
-          status: response.success,
+          status:
+            response.success === true || response.success === false
+              ? response.success
+              : true,
           form: response.data,
           list: response.data,
           errors: [],
@@ -327,10 +330,17 @@ class Model {
         case this.types.delete_success: //  Put res in state
           // console.log("DELETE SUCCESS HERE - Dealing with form ", action);
           var { id, type, status, form, list, errors } = action.payload;
+          console.log("MODEL", action);
           if (status === true) {
             // Put data in list
             newState = { ...state, form: this.form }; // fill both list and form from new data/clear
             if (newState.actions[id]) {
+              // Hack for logs
+              if (this.name.includes("log")) {
+                newState.logs = action.payload.form.logs
+                  ? action.payload.form.logs
+                  : action.payload.form;
+              }
               newState.actions[id]["res"] = action.payload;
               if (newState.actions[id]["res"]["errors"].length === 0) {
                 newState.actions[id]["res"]["errors"] = this.messages(

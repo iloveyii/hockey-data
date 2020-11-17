@@ -9,6 +9,7 @@ import { Container, Paper, Button } from "@material-ui/core";
 import models from "../../store";
 import { connect } from "react-redux";
 import { withRouter, Link } from "react-router-dom";
+import { CountdownCircleTimer } from "react-countdown-circle-timer";
 
 const drawerWidth = 240;
 const query = `
@@ -152,11 +153,7 @@ class Charts extends React.Component {
     };
   }
 
-  setForm(props) {
-    const { stats, game_logs } = props;
-    if (stats && stats.days && stats.weeks && stats.average) {
-      this.setState({ stats });
-    }
+  setLogs = (game_logs) => {
     if (game_logs && Object.keys(game_logs).length > 0) {
       Object.keys(game_logs).map((key) => {
         const log = game_logs[key];
@@ -183,9 +180,21 @@ class Charts extends React.Component {
                 this.setState({ logs });
               }
             }
-          }, 5000);
+          }, 1000);
         }
       });
+    }
+  };
+
+  setForm(props) {
+    const { stats, game_logs, logs } = props;
+    if (stats && stats.days && stats.weeks && stats.average) {
+      this.setState({ stats });
+    }
+    // set logs
+    // this.setLogs(game_logs);
+    if (logs && Array.isArray(logs) && logs.length > 0) {
+      this.setState({ logs });
     }
   }
 
@@ -301,10 +310,33 @@ class Charts extends React.Component {
               <div className="card">
                 <div
                   className={"card-header card-header-info"}
-                  style={{ backgroundColor: "#063950" }}
+                  style={{
+                    background: "linear-gradient(60deg, black, #063950);",
+                  }}
                 >
                   <h4 className="card-title">
                     <img src="/images/ep-logo.svg" height="50" />
+                    <div style={{ float: "right", width: "80px" }}>
+                      <CountdownCircleTimer
+                        key={1}
+                        size="50"
+                        strokeWidth="5"
+                        isPlaying
+                        duration={20}
+                        colors={[
+                          ["#004777", 0.33],
+                          ["#F7B801", 0.33],
+                          ["#A30000"],
+                        ]}
+                        onComplete={() => {
+                          this.props.createAction({ query });
+                          this.forceUpdate();
+                          return [true, 1000];
+                        }}
+                      >
+                        {renderTime}
+                      </CountdownCircleTimer>
+                    </div>
                   </h4>
                 </div>
                 <div className="card-body table-responsive">
@@ -330,6 +362,22 @@ Charts.defaultProps = {
   },
 };
 
+const renderTime = ({ remainingTime }) => {
+  return (
+    <div
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        justifyContent: "center",
+      }}
+    >
+      <div style={{ fontSize: "12px", textAlign: "center" }}>
+        {remainingTime}
+      </div>
+    </div>
+  );
+};
 /**
  * Get data from store
  * @param state
@@ -340,6 +388,7 @@ const mapStateToProps = (state) => ({
   login: state.logins.list.length > 0 ? state.logins.list[0] : undefined,
   users: state.users.list.length > 0 ? state.users.list : [],
   game_logs: state.game_logs.actions,
+  logs: state.game_logs.logs,
 });
 
 /**
