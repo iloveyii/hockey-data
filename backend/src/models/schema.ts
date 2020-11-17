@@ -64,7 +64,7 @@ const getTeamLog = async () => {
   await model.read(condition, { position: -1 });
   if (model.response.success === true) {
     // If data found in db
-    return model.response.data;
+    return model.response.data?.slice(0, 20);
   }
 
   // Finally make API call
@@ -81,7 +81,7 @@ const getTeamLog = async () => {
             team_id,
             name,
             url,
-            position: position ? position : 0,
+            position: Number(position),
             stat: { GP, W, L, T, OTW, OTL, PTS, GF, GA, GD },
             timestamp,
           };
@@ -105,7 +105,7 @@ const getTeamLog = async () => {
       }
     });
 
-    return teams;
+    return teams.slice(0, 20);
   });
 };
 
