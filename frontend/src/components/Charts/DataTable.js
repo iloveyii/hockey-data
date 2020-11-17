@@ -6,7 +6,7 @@ import { withStyles } from "@material-ui/styles";
 const columns = [
   {
     field: "id",
-    headerName: "ID",
+    headerName: "#",
     width: 80,
   },
   { field: "name", headerName: "Team", width: 130 },
@@ -143,12 +143,6 @@ const sortModel = [
 ];
 
 class DataTable extends React.Component {
-  componentDidMount() {
-    console.log("GameLog componentDidMount", this.props);
-  }
-  componentWillReceiveProps(nextProps, nextContext) {
-    console.log("GameLog componentWillReceiveProps", nextProps);
-  }
   render() {
     let { shl } = this.props;
     shl = shl.map((row, i) => ({ ...row, id: i + 1 }));

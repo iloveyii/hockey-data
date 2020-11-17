@@ -63,7 +63,7 @@ const getTeamLog = async () => {
   // Check DB first
   const model = new Team(undefined);
   const condition = new Condition({ where: { timestamp } });
-  await model.read(condition, { position: -1 });
+  await model.read(condition, { position: 1 });
   if (model.response.success === true) {
     // If data found in db
     return model.response.data?.slice(0, Number(ARRAY_SIZE));
@@ -83,7 +83,7 @@ const getTeamLog = async () => {
             team_id,
             name,
             url,
-            position: Number(position),
+            position: position ? position : 1000,
             stat: { GP, W, L, T, OTW, OTL, PTS, GF, GA, GD },
             timestamp,
           };
@@ -96,7 +96,7 @@ const getTeamLog = async () => {
     const teams = await Promise.all(requests);
     // Sort on position
     teams.sort((a: any, b: any) =>
-      Number(a.position) > Number(b.position) ? -1 : 1
+      Number(a.position) > Number(b.position) ? 1 : -1
     );
     // Save to DB
     teams.map(async (team: any) => {
