@@ -8,9 +8,9 @@
 - En single-page sida som visar tabellen på ett kreativt sätt
 - Skriva en readme för att beskriva uppsättning lokalt
 
-| Screenshot                                                                                       |
-| ------------------------------------------------------------------------------------------------ |
-| ![hkr](https://github.com/iloveyii/shl-table-graphql/blob/master/frontend/public/images/shl.png) |
+| Screenshot                                                                                 |
+| ------------------------------------------------------------------------------------------ |
+| ![hkr](https://github.com/iloveyii/hockey-data/blob/master/frontend/public/images/shl.png) |
 
 - [DEMO PROJECT - Link 1](http://hkr-project.hopto.org:7700)
 
