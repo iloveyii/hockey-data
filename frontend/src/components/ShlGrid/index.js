@@ -39,7 +39,7 @@ class ShlGrid extends React.Component {
     const { data } = this.state;
 
     return (
-      <div style={{ minHeight: 750, width: "100%" }}>
+      <div style={{ minHeight: 750, width: "100%", overflow: "auto" }}>
         <DataGrid rows={data} columns={columns} />
       </div>
     );
