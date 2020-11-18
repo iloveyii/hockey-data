@@ -1,0 +1,4 @@
+# Express server to connect to
+API_URL=http://localhost
+API_PORT=7700
+ENV=development
