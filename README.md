@@ -30,8 +30,7 @@
 
 ## COMPONENT - ShlGrid
 
-- To use the reusable component ShlGrid in your own project, simply copy frontend/
-- The frontend/ShlGrid to your project and use it as
+- To use the reusable component ShlGrid in your own project, simply copy `frontend/ShlGrid` to your project and use it as
 
 ```
   <DataGrid rows={data} columns={columns} />
