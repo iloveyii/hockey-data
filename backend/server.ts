@@ -14,7 +14,7 @@ import { Database } from "./src/models/base/Database";
 dotenv.config({ path: ".env" });
 const {
   API_URL = "http://localhost",
-  API_PORT = 5500,
+  API_PORT = 7700,
   SESS_NAME = "sid",
   SESS_SECRET = "top-secret",
   SESS_LIFETIME = 1000 * 60 * 60 * 2, // 2 hrs

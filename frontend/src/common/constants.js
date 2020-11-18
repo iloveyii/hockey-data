@@ -1,7 +1,7 @@
 const apiServer =
   process.env.API_URL && process.env.API_PORT
     ? process.env.API_URL + ":" + process.env.API_PORT
-    : "/api/v1";
+    : "http://localhost:7700";
 console.log("apiServer:", apiServer);
 
 const statuses = {
