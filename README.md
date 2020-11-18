@@ -17,10 +17,10 @@
 ## INSTALLATION
 
 - We will use Ubuntu as operating system for all installations below, but it should work on any operating system.
+- Install mongodb `sudo apt update & sudo apt install mongodb -y`
 - Clone the repo `git clone https://github.com/iloveyii/hockey-data.git`
 - Install packages in both backend and frontend by cd to backend or frontend and then `npm i` and then run both applications as `npm start`
-- The frontend application will open browser, simply click login and you will see SHL table at Dashboard.
-- Install mongodb `sudo apt update & sudo apt install mongodb -y`
+- The frontend application will open browser, simply (change email to root@admin.com) click login and you will see SHL table at Dashboard.
 
 ## CONFIGURATION
 
