@@ -44,3 +44,8 @@
 - The sample columns is in `frontend/ShlGrid/columns.js`
 - You don't need to provide any rows or columns for a static demo
 - However you should provide `rows` and `columns` as stated above, for dynamic data.
+
+## TROUBLESHOOTING
+
+- `[nodemon] Internal watch failed: ENOSPC: System limit for number of file watchers r`
+  - `echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf && sudo sysctl -p `
