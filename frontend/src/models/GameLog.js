@@ -1,10 +1,11 @@
 import ActiveRecord from "./base/ActiveRecord";
+import { apiServer } from "../common/constants";
 
 class GameLog extends ActiveRecord {
   constructor(name) {
     super(name);
     this._form = {};
-    this.server = "http://localhost:7700/graphql?";
+    this.server = `${apiServer}/graphql?`;
   }
 
   rules() {
