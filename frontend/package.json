@@ -4,7 +4,7 @@
   "description": "A MERN application with webpack and material-ui",
   "main": "index.js",
   "scripts": {
-    "start": "webpack-dev-server --mode development --open --port 9000 --host 0.0.0.0  --compress --hot",
+    "start": "webpack-dev-server --mode development --open --port 8000 --host 0.0.0.0  --compress --hot",
     "_build:dev": "webpack --mode development --progress",
     "_build:prod": "webpack --mode production --progress",
     "build": "npm run _build:prod",

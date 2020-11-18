@@ -169,16 +169,20 @@ class Charts extends React.Component {
     const { login, users, readAction, createAction } = this.props;
     createAction({ query });
     if (login) {
+      console.log("READ Sensor data login", login);
       const user = users.find((u) => u.email === login.email);
       if (user && user.id) {
+        console.log("READ Sensor data user", user);
         readAction({ suffix: "/" + user.id + "/stats" });
         // const interval = 1000 * 60 * 10; // 10 min
-        const interval = 1000 * 300;
+        const interval = 1000 * 60 * 10;
         this.intID = setInterval(() => {
           console.log("READ Sensor data");
           readAction({ suffix: "/" + user.id + "/stats" });
         }, interval);
       }
+    } else {
+      console.log("READ Sensor data no login");
     }
     this.setForm(this.props);
   }
@@ -320,6 +324,20 @@ class Charts extends React.Component {
               </div>
             </div>
           </div>
+          <div className="row">
+            <Table
+              id="multilineChart"
+              type="success"
+              title="Daily"
+              data={{ days: this.state.stats.days }}
+            />
+            <Table
+              id="barChart"
+              type="info"
+              title="Weekly"
+              data={{ weeks: this.state.stats.weeks }}
+            />
+          </div>
         </Container>
       </div>
     );
@@ -358,7 +376,7 @@ const renderTime = ({ remainingTime }) => {
 const mapStateToProps = (state) => ({
   stats:
     state.sensor_datas.list.length > 0 ? state.sensor_datas.list[0] : undefined,
-  login: state.logins.list.length > 0 ? state.logins.list[0] : undefined,
+  login: state.logins.list.length > 0 ? state.logins.list[1] : undefined,
   users: state.users.list.length > 0 ? state.users.list : [],
   game_logs: state.game_logs.actions,
   logs: state.game_logs.logs,
