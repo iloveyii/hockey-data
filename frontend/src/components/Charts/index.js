@@ -10,6 +10,7 @@ import models from "../../store";
 import { connect } from "react-redux";
 import { withRouter, Link } from "react-router-dom";
 import { CountdownCircleTimer } from "react-countdown-circle-timer";
+import ShlGrid from "../ShlGrid";
 
 const drawerWidth = 240;
 const query = `
@@ -153,46 +154,12 @@ class Charts extends React.Component {
     };
   }
 
-  setLogs = (game_logs) => {
-    if (game_logs && Object.keys(game_logs).length > 0) {
-      Object.keys(game_logs).map((key) => {
-        const log = game_logs[key];
-        window.log = log;
-        localStorage.setItem("log", JSON.stringify(log));
-        if (log.req.method == "POST") {
-          console.log("GameLog with req.method == POST", key, window.log.res);
-          setTimeout(() => {
-            let { logs } = this.state;
-            if (Array.isArray(logs) && logs.length > 0) {
-              console.log(
-                "GameLog with req.method == POST and res - logs in state already",
-                key,
-                logs
-              );
-            } else {
-              if (log.res && log.res.list && log.res.list.logs) {
-                logs = log.res.list.logs;
-                console.log(
-                  "GameLog with req.method == POST and res set state",
-                  key,
-                  logs
-                );
-                this.setState({ logs });
-              }
-            }
-          }, 1000);
-        }
-      });
-    }
-  };
-
   setForm(props) {
     const { stats, game_logs, logs } = props;
     if (stats && stats.days && stats.weeks && stats.average) {
       this.setState({ stats });
     }
     // set logs
-    // this.setLogs(game_logs);
     if (logs && Array.isArray(logs) && logs.length > 0) {
       this.setState({ logs });
     }
@@ -311,18 +278,26 @@ class Charts extends React.Component {
                 <div
                   className={"card-header card-header-info"}
                   style={{
-                    background: "linear-gradient(60deg, black, #063950);",
+                    background:
+                      "linearGradient(60deg, black, #063950) !important",
                   }}
                 >
                   <h4 className="card-title">
                     <img src="/images/ep-logo.svg" height="50" />
-                    <div style={{ float: "right", width: "80px" }}>
+                    <div
+                      style={{
+                        float: "right",
+                        display: "flex",
+                        justifyContent: "center",
+                        alignItems: "center",
+                      }}
+                    >
                       <CountdownCircleTimer
                         key={1}
-                        size="50"
+                        size="45"
                         strokeWidth="5"
                         isPlaying
-                        duration={20}
+                        duration={60}
                         colors={[
                           ["#004777", 0.33],
                           ["#F7B801", 0.33],
@@ -341,7 +316,7 @@ class Charts extends React.Component {
                 </div>
                 <div className="card-body table-responsive">
                   {this.state.logs.length > 0 && (
-                    <DataTable shl={this.state.logs} />
+                    <ShlGrid shl={this.state.logs} />
                   )}
                 </div>
               </div>

@@ -1,9 +1,6 @@
-import React, { useEffect } from "react";
-import { DataGrid, numberComparer } from "@material-ui/data-grid";
-import { ObjectID } from "bson";
-import { withStyles } from "@material-ui/styles";
+import React from "react";
 
-const columns = [
+export const columns = [
   {
     field: "id",
     headerName: "#",
@@ -118,40 +115,3 @@ const columns = [
     sortable: true,
   },
 ];
-
-const styles = (theme) => ({
-  main: {
-    [theme.breakpoints.up("sm")]: {
-      width: `calc(100% - ${drawerWidth}px)`,
-      marginLeft: drawerWidth,
-    },
-  },
-  form: {
-    display: "flex",
-    flexDirection: "column",
-  },
-  row: {
-    backgroundColor: "red",
-  },
-});
-
-const sortModel = [
-  {
-    field: "position",
-    sort: "asc",
-  },
-];
-
-class DataTable extends React.Component {
-  render() {
-    let { shl } = this.props;
-    shl = shl.map((row, i) => ({ ...row, id: i + 1 }));
-    return (
-      <div style={{ height: 750, width: "100%" }}>
-        <DataGrid rows={shl} columns={columns} />
-      </div>
-    );
-  }
-}
-
-export default DataTable;
