@@ -12,7 +12,7 @@
 | ------------------------------------------------------------------------------------------ |
 | ![hkr](https://github.com/iloveyii/hockey-data/blob/master/frontend/public/images/shl.png) |
 
-- [DEMO PROJECT - Link 1](http://hocky.ddns.net:7700)
+- [DEMO PROJECT - Link 1](http://hockey-data.ddns.net:7700)
 - [DEMO PROJECT - Link 2](http://52.55.155.45:7700)
 
 ## INSTALLATION
