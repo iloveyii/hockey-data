@@ -14,8 +14,6 @@
 
 - [DEMO PROJECT - Link 1](http://hkr-project.hopto.org:7700)
 
-                                                           |
-
 ## INSTALLATION
 
 - We will use Ubuntu as operating system for all installations below, but it should work on any operating system.
