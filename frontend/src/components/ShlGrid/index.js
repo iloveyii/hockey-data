@@ -4,6 +4,7 @@ import { ObjectID } from "bson";
 import { withStyles } from "@material-ui/styles";
 import { styles } from "./styles";
 import { columns } from "./columns";
+import { logs } from "./mock";
 
 const sortModel = [
   {
@@ -13,12 +14,33 @@ const sortModel = [
 ];
 
 class ShlGrid extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = { data: logs };
+  }
+
+  setForm = (props) => {
+    const { shl } = props;
+    if (shl && Array.isArray(shl) && shl.length > 0) {
+      console.log("SHL");
+      const data = shl.map((row, i) => ({ ...row, id: i + 1 }));
+      this.setState({ data });
+    }
+  };
+
+  componentDidMount() {
+    this.setForm(this.props);
+  }
+
+  componentWillReceiveProps(nextProps, nextContext) {
+    this.setForm(nextProps);
+  }
   render() {
-    let { shl } = this.props;
-    shl = shl.map((row, i) => ({ ...row, id: i + 1 }));
+    const { data } = this.state;
+
     return (
       <div style={{ height: 750, width: "100%" }}>
-        <DataGrid rows={shl} columns={columns} />
+        <DataGrid rows={data} columns={columns} />
       </div>
     );
   }

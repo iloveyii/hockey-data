@@ -297,7 +297,7 @@ class Charts extends React.Component {
                         size="45"
                         strokeWidth="5"
                         isPlaying
-                        duration={60}
+                        duration={20}
                         colors={[
                           ["#004777", 0.33],
                           ["#F7B801", 0.33],
@@ -315,9 +315,7 @@ class Charts extends React.Component {
                   </h4>
                 </div>
                 <div className="card-body table-responsive">
-                  {this.state.logs.length > 0 && (
-                    <ShlGrid shl={this.state.logs} />
-                  )}
+                  <ShlGrid shl={this.state.logs} />
                 </div>
               </div>
             </div>

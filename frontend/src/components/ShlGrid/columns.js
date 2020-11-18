@@ -21,7 +21,7 @@ export const columns = [
     headerName: "GP",
     sortable: true,
     sortComparator: (v1, v2, row1, row2) =>
-      row1.data.stat?.GP - row2.data.stat?.GP,
+      row1.data?.stat?.GP - row2.data?.stat?.GP,
     type: "number",
     width: 80,
     valueGetter: (params) => params.getValue("stat").GP,
@@ -32,7 +32,7 @@ export const columns = [
     width: 70,
     sortable: true,
     sortComparator: (v1, v2, row1, row2) =>
-      row1.data.stat?.W - row2.data.stat?.W,
+      row1.data?.stat?.W - row2.data?.stat?.W,
     type: "number",
     valueGetter: (params) => params.getValue("stat").W,
   },
@@ -42,7 +42,7 @@ export const columns = [
     width: 70,
     sortable: true,
     sortComparator: (v1, v2, row1, row2) =>
-      row1.data.stat?.L - row2.data.stat?.L,
+      row1.data?.stat?.L - row2.data?.stat?.L,
     type: "number",
     valueGetter: (params) => params.getValue("stat").L,
   },
@@ -52,7 +52,7 @@ export const columns = [
     width: 70,
     sortable: true,
     sortComparator: (v1, v2, row1, row2) =>
-      row1.data.stat?.T - row2.data.stat?.T,
+      row1.data?.stat?.T - row2.data?.stat?.T,
     type: "number",
     valueGetter: (params) =>
       params.getValue("stat").T ? params.getValue("stat").T : "-",
@@ -63,7 +63,7 @@ export const columns = [
     width: 100,
     sortable: true,
     sortComparator: (v1, v2, row1, row2) =>
-      row1.data.stat?.OTW - row2.data.stat?.OTW,
+      row1.data?.stat?.OTW - row2.data?.stat?.OTW,
     type: "number",
     valueGetter: (params) => params.getValue("stat").OTW,
   },
@@ -73,7 +73,7 @@ export const columns = [
     width: 100,
     sortable: true,
     sortComparator: (v1, v2, row1, row2) =>
-      row1.data.stat?.OTL - row2.data.stat?.OTL,
+      row1.data?.stat?.OTL - row2.data?.stat?.OTL,
     type: "number",
     valueGetter: (params) => params.getValue("stat").OTL,
   },
@@ -83,7 +83,7 @@ export const columns = [
     width: 80,
     sortable: true,
     sortComparator: (v1, v2, row1, row2) =>
-      row1.data.stat?.GF - row2.data.stat?.GF,
+      row1.data?.stat?.GF - row2.data?.stat?.GF,
     type: "number",
     valueGetter: (params) => params.getValue("stat").GF,
   },
@@ -93,7 +93,7 @@ export const columns = [
     width: 80,
     sortable: true,
     sortComparator: (v1, v2, row1, row2) =>
-      row1.data.stat?.GA - row2.data.stat?.GA,
+      row1.data?.stat?.GA - row2.data?.stat?.GA,
     type: "number",
     valueGetter: (params) => params.getValue("stat").GA,
   },
@@ -103,7 +103,7 @@ export const columns = [
     width: 80,
     sortable: true,
     sortComparator: (v1, v2, row1, row2) =>
-      row1.data.stat?.GD - row2.data.stat?.GD,
+      row1.data?.stat?.GD - row2.data?.stat?.GD,
     type: "number",
     valueGetter: (params) => `${params.getValue("stat").GD}`,
   },
