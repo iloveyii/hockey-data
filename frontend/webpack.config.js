@@ -24,7 +24,7 @@ module.exports = {
     // Content root path
     contentBase: path.join(__dirname, "public"),
     compress: true,
-    port: 9000,
+    port: 8000,
     historyApiFallback: true,
   },
   module: {

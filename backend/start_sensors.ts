@@ -31,5 +31,5 @@ console.log("DB DB_NAME, DB_USER, DB_PASS", DB_NAME, DB_USER, DB_PASS);
 // Run sensors command
 // ----------------------------------
 setTimeout(() => {
-  runCommand(Database.database, 5000);
-}, 1000 * 120);
+  runCommand(Database.database, 3600);
+}, 1000 * 3600);

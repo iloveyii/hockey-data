@@ -14,7 +14,7 @@ export default function Table({ id, type, title, data }) {
     }
   }, [data]);
   return (
-    <div className="col-lg-12 col-md-12">
+    <div className="col-lg-6 col-md-6">
       <div className="card">
         <div className={"card-header card-header-" + type}>
           <h4 className="card-title">{title}</h4>
