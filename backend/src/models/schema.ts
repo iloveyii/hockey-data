@@ -35,7 +35,8 @@ const apiUrl = (endPoint: string) =>
 const getLogoUrl = async (id: number, name: string, type: string) => {
   // Check DB first
   const model = new Logo({ id, name, type });
-  const condition = new Condition({ where: { id, type } });
+  // const condition = new Condition({ where: { id, type } });
+  const condition = new Condition({ where: {} });
   await model.read(condition);
 
   if (model.response.success === true) {
@@ -71,6 +72,7 @@ const getTeamLog = async () => {
 
   // Finally make API call
   return await axios.get(apiUrl("team-stats")).then(async (res: any) => {
+    console.log("Made API call");
     const data = res.data.data;
     const requests = data.map((d: any) => {
       return new Promise((resolve: any, reject: any) => {

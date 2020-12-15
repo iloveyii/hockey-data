@@ -5,6 +5,7 @@ import schema from "../models/schema";
 import { graphqlHTTP } from "express-graphql";
 
 const router = express.Router();
+// GraphiQL
 router.route("/").get(
   graphqlHTTP({
     schema,
@@ -12,6 +13,7 @@ router.route("/").get(
   })
 );
 
+// Query
 router.route("/").post(
   graphqlHTTP({
     schema,
