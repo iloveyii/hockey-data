@@ -35,19 +35,30 @@ class Deploy extends Mongo {
     if (this.data["action"] && this.data["action"] === "start_deploy") {
       console.log("Starting deploy");
       await this.startDeploy();
-      this.setResponse(true, { msg: "deploy started" });
+      this.data["action"] = "deploy_done";
+      await super.update(condition);
+      this.setResponse(true, { msg: "Deploy started" });
       return this;
     }
     return super.update(condition);
   }
 
   async startDeploy() {
-    const sp = spawn("sh", [
-      "/home/alex/projects/tests/esmg/hockey-data/deploy/clone.sh",
-    ]);
+    const { shell, github_url, name } = this.data;
+    let strShell = shell.trim().split("\n").join(" && ");
+    strShell = `cd /home/alex/projects/tmpdeploy/${name} && ` + strShell;
+    console.log("Shell", strShell);
+    console.log("github_url", github_url);
+
+    let sp = spawn(
+      `/home/alex/projects/tests/esmg/hockey-data/deploy/clone.sh ${github_url} ${name} && ${strShell}`,
+      { shell: true }
+    );
     sp.stdout.on("data", (data: any) => {
       const msg = data.toString("utf8");
       console.log("DATA : ", msg);
+      if (msg.includes("script")) {
+      }
       io.sockets.emit("deploy", { msg });
     });
     sp.stderr.on("error", (error: any) =>

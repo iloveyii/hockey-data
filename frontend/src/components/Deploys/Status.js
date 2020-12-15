@@ -50,6 +50,13 @@ class Form extends React.Component {
       const { progress } = this.state;
       progress.push(data.msg);
       this.setState({ progress });
+      setTimeout(
+        () =>
+          (document.getElementById(
+            "progress"
+          ).scrollTop = document.getElementById("progress").scrollHeight),
+        500
+      );
     });
   }
 
@@ -103,11 +110,13 @@ class Form extends React.Component {
     return (
       <form autoComplete="off" noValidate className={classes.form}>
         <div
+          id="progress"
           style={{
             backgroundColor: "black",
             height: 300,
             color: "green",
             padding: 5,
+            overflowY: "scroll",
           }}
         >
           <p>Deployment started ...</p>

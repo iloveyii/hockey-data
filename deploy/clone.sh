@@ -7,9 +7,9 @@ DEPLOY_DIR=/home/alex/projects/tmpdeploy
 command 2> $DEPLOY_DIR/error.log
 
 # Pull project repo
-echo "Cloning to "$DEPLOY_DIR
+echo "Cloning to "$DEPLOY_DIR" repo link "$1
 cd $DEPLOY_DIR
-git clone git@github.com:iloveyii/web-editor.git
+git clone $1 $2
 
 echo "Cloned successfully"
 sleep 3
