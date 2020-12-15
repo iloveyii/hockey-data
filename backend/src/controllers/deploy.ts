@@ -14,7 +14,7 @@ export const getDeploys = async (
   return res.status(200).send(model.response);
 };
 
-// @desc   Register/Create a Model - using bcrypt hashed passwords
+// @desc   Create a Model
 // @route  POST /api/v1/deploys
 export const createDeploy = async (
   req: Request,
@@ -26,7 +26,8 @@ export const createDeploy = async (
   (await model.validate()) && (await model.create());
   return res.status(201).send(model.response);
 };
-// @desc   Create a Model - using bcrypt hashed passwords
+
+// @desc   Create a Model
 // @route  POST /api/v1/Deploys
 export const createDeploy2 = async (
   req: Request,
