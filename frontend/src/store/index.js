@@ -5,6 +5,7 @@ import Permission from "../models/Permission";
 import Gatekeeper from "../models/Gatekeeper";
 import SensorData from "../models/SensorData";
 import GameLog from "../models/GameLog";
+import Deploy from "../models/Deploy";
 
 const models = {
   logins: new Login("logins"),
@@ -14,6 +15,7 @@ const models = {
   gatekeepers: new Gatekeeper("gatekeepers"),
   sensor_datas: new SensorData("sensor_datas"),
   game_logs: new GameLog("game_logs"),
+  deploys: new Deploy("deploys"),
 };
 
 export default models;

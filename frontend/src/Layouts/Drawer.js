@@ -17,6 +17,7 @@ import SettingsApplicationsOutlinedIcon from "@material-ui/icons/SettingsApplica
 import OfflinePinOutlinedIcon from "@material-ui/icons/OfflinePinOutlined";
 import DashboardOutlinedIcon from "@material-ui/icons/DashboardOutlined";
 import SettingsRemoteOutlinedIcon from "@material-ui/icons/SettingsRemoteOutlined";
+import SystemUpdateAltIcon from "@material-ui/icons/SystemUpdateAlt";
 import Hidden from "@material-ui/core/Hidden";
 import { Link } from "react-router-dom";
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
@@ -147,6 +148,15 @@ export default function SwipeableTemporaryDrawer({ state, toggleDrawer }) {
               <SettingsApplicationsOutlinedIcon />
             </ListItemIcon>
             <ListItemText className={classes.listItemText} primary="Settings" />
+          </ListItem>
+        </Link>
+
+        <Link className={classes.link} to="/deploys">
+          <ListItem button>
+            <ListItemIcon>
+              <SystemUpdateAltIcon />
+            </ListItemIcon>
+            <ListItemText className={classes.listItemText} primary="Deploys" />
           </ListItem>
         </Link>
 
