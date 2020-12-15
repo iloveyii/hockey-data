@@ -14,7 +14,7 @@ type DeployT = {
 
 const COLLECTION = "deploys";
 
-class Logo extends Mongo {
+class Deploy extends Mongo {
   constructor(private logo?: DeployT) {
     super(COLLECTION, logo);
   }

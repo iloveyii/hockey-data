@@ -1,6 +1,5 @@
 import { Request, Response, NextFunction } from "express";
 import { exec, spawn } from "child_process";
-import Deploy from "../models/Deploy";
 
 // @desc   Get a Model
 // @route  GET /api/v1/deploys
@@ -9,26 +8,15 @@ export const getDeploys = async (
   res: Response,
   next: NextFunction
 ) => {
-  const model = new Deploy(undefined);
-  await model.read();
-  return res.status(200).send(model.response);
+  return res.status(200).send({
+    success: true,
+    msg: "You successfully accessed route - GET /api/v1/deploys",
+  });
 };
 
-// @desc   Register/Create a Model - using bcrypt hashed passwords
-// @route  POST /api/v1/deploys
-export const createDeploy = async (
-  req: Request,
-  res: Response,
-  next: NextFunction
-) => {
-  console.log("Deploy received :", req.body);
-  const model = new Deploy(req.body);
-  (await model.validate()) && (await model.create());
-  return res.status(201).send(model.response);
-};
 // @desc   Create a Model - using bcrypt hashed passwords
 // @route  POST /api/v1/Deploys
-export const createDeploy2 = async (
+export const createDeploy = async (
   req: Request,
   res: Response,
   next: NextFunction
