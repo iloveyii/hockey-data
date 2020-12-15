@@ -11,12 +11,14 @@ import {
 import { Paper, Button } from "@material-ui/core";
 import OfflinePinOutlinedIcon from "@material-ui/icons/OfflinePinOutlined";
 import CancelPresentationOutlinedIcon from "@material-ui/icons/CancelPresentationOutlined";
+import SystemUpdateAltIcon from "@material-ui/icons/SystemUpdateAlt";
 import { connect } from "react-redux";
 import { withRouter, Link } from "react-router-dom";
 import { withStyles } from "@material-ui/styles";
 
 import Popup from "../Popup";
 import Form from "./Form";
+import Status from "./Status";
 
 import ConfirmDialog from "../ConfirmDialog";
 import models from "../../store";
@@ -34,13 +36,20 @@ class DeploysList extends React.Component {
     this.state = {
       openPopup: false,
       openConfirmDialog: false,
+      openDeployDialog: false,
       currentUser: null,
+      deploy: false,
     };
   }
 
   onDelete = (row) => {
     console.log("Deleting ", row);
     this.setState({ currentUser: row, openConfirmDialog: true });
+  };
+
+  onDeploy = (row) => {
+    console.log("Status Deploy started ", row);
+    this.setState({ deploy: row, openDeployDialog: true });
   };
 
   componentWillReceiveProps(nextProps, context) {
@@ -113,7 +122,22 @@ class DeploysList extends React.Component {
                   {row.shell}
                 </TableCell>
 
-                <TableCell align="right">
+                <TableCell
+                  align="right"
+                  style={{ display: "flex", flexDirection: "row" }}
+                >
+                  <Button
+                    style={{ float: "left", padding: 3, marginRight: 5 }}
+                    margin="normal"
+                    size="small"
+                    variant="contained"
+                    color="secondary"
+                    onClick={(e) => {
+                      this.onDeploy(row);
+                    }}
+                  >
+                    <SystemUpdateAltIcon />
+                  </Button>
                   <Button
                     style={{ float: "right", padding: 3 }}
                     margin="normal"
@@ -139,11 +163,19 @@ class DeploysList extends React.Component {
         />
 
         <Popup
-          title="Add Door"
+          title="Add Deploy"
           open={this.state.openPopup}
           setOpen={(status) => this.setState({ openPopup: status })}
         >
           <Form />
+        </Popup>
+
+        <Popup
+          title="Deployment start"
+          open={this.state.openDeployDialog}
+          setOpen={(status) => this.setState({ openDeployDialog: status })}
+        >
+          <Status deploy={this.state.deploy} />
         </Popup>
       </TableContainer>
     );

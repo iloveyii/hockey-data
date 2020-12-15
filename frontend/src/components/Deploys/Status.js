@@ -31,31 +31,36 @@ class Form extends React.Component {
   }
 
   setForm = (props) => {
-    const { form } = props;
-    if (Object.keys(form).length !== 0) {
-      this.setState({ form });
+    const { deploy } = props;
+    if (Object.keys(deploy).length !== 0) {
+      this.setState({ deploy });
     }
   };
   componentWillReceiveProps(nextProps, context) {
     this.setForm(nextProps);
-    console.log("componentWillReceiveProps");
+    console.log("Status componentWillReceiveProps");
   }
 
   componentDidMount() {
     this.setForm(this.props);
-    console.log("componentDidMount");
+    console.log("Status componentDidMount", this.props);
   }
 
   onCreate = (e) => {
     e.preventDefault();
     const model = models.deploys;
-    const { form } = this.state;
+    const { deploy } = this.state;
+    const form = deploy;
 
     if (model && model.validate(form)) {
       console.log("Update or create ");
       if (form.id) {
         console.log("UPDATE");
-        this.props.updateAction({ ...model.form });
+        this.props.updateAction({
+          ...model.form,
+          email: "admin@deploy.com",
+          action: "start_deploy",
+        });
       } else {
         console.log("CREATE");
         this.props.createAction({ ...model.form });
@@ -90,44 +95,17 @@ class Form extends React.Component {
 
     return (
       <form autoComplete="off" noValidate className={classes.form}>
-        <TextField
-          margin="normal"
-          label="Name"
-          variant="outlined"
-          name="name"
-          helperText={this.display_error(this.state.form_errors.building)}
-          error={this.state.form_errors.building ? true : false}
-          onChange={this.onChange}
-          value={form.name}
-        />
-        <TextField
-          margin="normal"
-          label="Type"
-          variant="outlined"
-          name="type"
-          onChange={this.onChange}
-          value={form.type}
-          fullWidth
-        />
-        <TextField
-          margin="normal"
-          label="Github"
-          variant="outlined"
-          name="github_url"
-          onChange={this.onChange}
-          value={form.github_url}
-        />
-        <TextareaAutosize
-          margin="normal"
-          label="Shell"
-          placeholder="Shell"
-          rowsMax={15}
-          rowsMin={10}
-          variant="outlined"
-          name="shell"
-          onChange={this.onChange}
-          value={form.shell}
-        />
+        <div
+          style={{
+            backgroundColor: "black",
+            height: 300,
+            color: "green",
+            padding: 5,
+          }}
+        >
+          <p>Deployment started ...</p>
+          <p>cloning repo ...</p>
+        </div>
         <Button
           style={{ marginTop: "1em" }}
           margin="normal"
@@ -136,7 +114,7 @@ class Form extends React.Component {
           color="primary"
           onClick={this.onCreate}
         >
-          Save
+          Start
         </Button>
         {form.id && (
           <Button
@@ -147,7 +125,7 @@ class Form extends React.Component {
             color="secondary"
             onClick={this.onDelete}
           >
-            Delete
+            Stop
           </Button>
         )}
       </form>

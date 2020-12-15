@@ -41,16 +41,16 @@ class Deploys extends React.Component {
         <Header />
         <Container maxWidth="md">
           <PageHeader
-            title="DOORS"
-            subtitle="Description about doors"
-            imageUrl="/images/doors.jpg"
+            title="Deployment"
+            subtitle="Description about deployment"
+            imageUrl="/images/deploy.png"
           />
           <Button onClick={this.onAdd} />
 
           <DeploysList />
 
           <Popup
-            title="Add Door"
+            title="Add Deployment"
             open={this.state.openPopup}
             setOpen={(status) => this.setState({ openPopup: status })}
           >

@@ -28,6 +28,16 @@ class Deploy extends Mongo {
       github_url: "required",
     };
   }
+
+  async update(condition: ConditionI) {
+    // Check if deploy or update
+    if (this.data["action"] && this.data["action"] === "start_deploy") {
+      console.log("Starting deploy");
+      this.setResponse(true, { msg: "deploy started" });
+      return this;
+    }
+    return super.update(condition);
+  }
 }
 
 export default Deploy;
