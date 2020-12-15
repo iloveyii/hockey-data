@@ -20,6 +20,7 @@ import models from "../store";
 const socket = io(apiServer, {
   transports: ["websocket", "polling"],
 });
+window.socket = socket;
 const drawerWidth = 240;
 
 const useStyles = makeStyles((theme) => ({

@@ -27,6 +27,7 @@ class Form extends React.Component {
     this.state = {
       form: models.deploys.form,
       form_errors: {},
+      progress: [],
     };
   }
 
@@ -44,6 +45,12 @@ class Form extends React.Component {
   componentDidMount() {
     this.setForm(this.props);
     console.log("Status componentDidMount", this.props);
+    socket.on("deploy", (data) => {
+      console.log("Status in status: ", data);
+      const { progress } = this.state;
+      progress.push(data.msg);
+      this.setState({ progress });
+    });
   }
 
   onCreate = (e) => {
@@ -105,6 +112,9 @@ class Form extends React.Component {
         >
           <p>Deployment started ...</p>
           <p>cloning repo ...</p>
+          {this.state.progress.map((p, i) => (
+            <p key={i}>{p}</p>
+          ))}
         </div>
         <Button
           style={{ marginTop: "1em" }}

@@ -1,6 +1,7 @@
 import Mongo from "./base/Mongo";
-import { Database } from "./base/Database";
 import { ConditionI } from "../interfaces";
+import { exec, spawn } from "child_process";
+import { io } from "../../server";
 
 type DeployT = {
   _id?: string;
@@ -33,10 +34,31 @@ class Deploy extends Mongo {
     // Check if deploy or update
     if (this.data["action"] && this.data["action"] === "start_deploy") {
       console.log("Starting deploy");
+      await this.startDeploy();
       this.setResponse(true, { msg: "deploy started" });
       return this;
     }
     return super.update(condition);
+  }
+
+  async startDeploy() {
+    const sp = spawn("sh", [
+      "/home/alex/projects/tests/esmg/hockey-data/deploy/clone.sh",
+    ]);
+    sp.stdout.on("data", (data: any) => {
+      const msg = data.toString("utf8");
+      console.log("DATA : ", msg);
+      io.sockets.emit("deploy", { msg });
+    });
+    sp.stderr.on("error", (error: any) =>
+      console.log("ERROR STD : ", error.toString("utf8"))
+    );
+    sp.on("error", (error: any) =>
+      console.log("ERROR : ", error.toString("utf8"))
+    );
+    sp.on("close", (code: any) =>
+      console.log(`child process exited with code ${code}`)
+    );
   }
 }
 
