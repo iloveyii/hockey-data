@@ -45,13 +45,24 @@ class Deploy extends Mongo {
 
   async startDeploy() {
     const { shell, github_url, name } = this.data;
-    let strShell = shell.trim().split("\n").join(" && ");
-    strShell = `cd /home/alex/projects/tmpdeploy/${name} && ` + strShell;
-    console.log("Shell", strShell);
+    let arrShell = shell.trim().split("\n");
+    let script = "";
+    const repoPath = `/home/alex/projects/tmpdeploy/${name}`;
+    arrShell.forEach((cmd: string) => {
+      if (cmd.includes("cd ")) {
+        const [cd, dir] = cmd.split(" ");
+        script += `cd ${repoPath}/${dir} && `;
+      } else {
+        script += `${cmd} && `;
+      }
+    });
+    script += " ls ";
+    script = `cd /home/alex/projects/tmpdeploy/${name} && ` + script;
+    console.log("Shell", script);
     console.log("github_url", github_url);
 
     let sp = spawn(
-      `/home/alex/projects/tests/esmg/hockey-data/deploy/clone.sh ${github_url} ${name} && ${strShell}`,
+      `/home/alex/projects/tests/esmg/hockey-data/deploy/clone.sh ${github_url} ${name} && ${script}`,
       { shell: true }
     );
     sp.stdout.on("data", (data: any) => {
